@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 var Cnyks     = require('../lib');
 var parseargs = require('nyks/process/parseargs');
 
