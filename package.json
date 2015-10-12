@@ -1,6 +1,6 @@
 {
   "name": "cnyks",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "Command line introspection tool for nodejs (interactive runner)",
   "main": "start.js",
   "scripts": {
@@ -26,7 +26,7 @@
   },
   "homepage": "https://github.com/131/cnyks",
   "dependencies": {
-    "nyks": "~1.1.11",
+    "nyks": "~1.2.3",
     "read": "^1.0.7",
     "uclass": "~2.0.6",
     "mout": "~0.11.0"
