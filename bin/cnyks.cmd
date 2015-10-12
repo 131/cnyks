@@ -1,0 +1,1 @@
+@node  -e "require('cnyks/bin/cnyks.js')" %0 %*
