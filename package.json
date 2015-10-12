@@ -1,0 +1,30 @@
+{
+  "name": "cnyks",
+  "version": "0.1.0",
+  "description": "Command line introspection tool for nodejs (interactive runner)",
+  "main": "start.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/131/cnyks.git"
+  },
+  "keywords": [
+    "command",
+    "line",
+    "introspection",
+    "reflection"
+  ],
+  "author": "Francois Leurent <131.js@cloudyks.org>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/131/cnyks/issues"
+  },
+  "homepage": "https://github.com/131/cnyks",
+  "dependencies": {
+    "nyks": "~1.1.11",
+    "read": "^1.0.7",
+    "uclass": "~2.0.6"
+  }
+}
