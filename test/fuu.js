@@ -18,7 +18,10 @@ var foo = new Class({
   },
 
 
-  dummy : function(){
+  dummy : function()
+  /**
+  * @interactive_runner hide
+  */ {
 
   },
 

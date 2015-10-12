@@ -4,7 +4,7 @@
   "description": "Command line introspection tool for nodejs (interactive runner)",
   "main": "start.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": " node node_modules/istanbul/lib/cli.js cover node_modules/mocha/bin/_mocha test/"
   },
   "repository": {
     "type": "git",
@@ -30,5 +30,10 @@
     "read": "https://github.com/131/read/tarball/master",
     "uclass": "~2.0.6",
     "mout": "~0.11.0"
+  },
+  "devDependencies": {
+    "expect.js": "^0.3.1",
+    "mocha": "^2.2.5",
+    "istanbul": "~0.3.18"
   }
 }
