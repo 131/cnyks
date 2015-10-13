@@ -1,6 +1,6 @@
 {
   "name": "cnyks",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "description": "Command line introspection tool for nodejs (interactive runner)",
   "main": "start.js",
   "scripts": {
