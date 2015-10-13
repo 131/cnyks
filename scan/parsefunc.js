@@ -1,4 +1,7 @@
+"use strict";
+
 var filter   = require('mout/array/filter');
+var combine  = require('nyks/object/combine');
 var parsedoc = require('./parsedoc');
 
 var argsSplitter = new RegExp("^function\\s+(\\S*)\\(([\\s\\S]*?)\\)\\s*(/\\*[\\s\\S]*?\\*/)?");
@@ -22,7 +25,7 @@ module.exports = function(fn){
 
     return {
       name   : q[1],
-      params : params,
+      params : combine(params, params),
       doc    : parseddoc,
       rawdoc : doc,
     };

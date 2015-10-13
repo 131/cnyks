@@ -1,6 +1,6 @@
 {
   "name": "cnyks",
-  "version": "0.2.8",
+  "version": "0.3.0",
   "description": "Command line introspection tool for nodejs (interactive runner)",
   "main": "start.js",
   "scripts": {
@@ -26,7 +26,7 @@
   },
   "homepage": "https://github.com/131/cnyks",
   "dependencies": {
-    "nyks": "~1.2.3",
+    "nyks": "~1.2.4",
     "read": "https://github.com/131/read/tarball/master",
     "uclass": "~2.0.6",
     "mout": "~0.11.0"

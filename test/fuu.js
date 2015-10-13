@@ -12,9 +12,10 @@ var foo = new Class({
     
   },
 
-  foo : function(){
-    return 42;
-
+  sum : function(a, b)/**
+  * @interactive_runner sync
+  */{
+    return a + b;
   },
 
 
