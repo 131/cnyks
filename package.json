@@ -4,7 +4,7 @@
   "description": "Command line introspection tool for nodejs (interactive runner)",
   "main": "start.js",
   "scripts": {
-    "test": " node node_modules/istanbul/lib/cli.js cover node_modules/mocha/bin/_mocha test/"
+    "test": "node node_modules/istanbul/lib/cli.js cover --dir coverage/master --print none --report none node_modules/mocha/bin/_mocha test/ && node node_modules/istanbul/lib/cli.js  report --include coverage/master/coverage.json --include coverage/child/coverage.json"
   },
   "repository": {
     "type": "git",
@@ -26,14 +26,16 @@
   },
   "homepage": "https://github.com/131/cnyks",
   "dependencies": {
+    "mout": "~0.11.0",
     "nyks": "~1.2.4",
     "read": "https://github.com/131/read/tarball/master",
-    "uclass": "~2.0.6",
-    "mout": "~0.11.0"
+    "reflection-js": "^0.2.0",
+    "uclass": "~2.0.6"
   },
   "devDependencies": {
+    "duplexer": "^0.1.1",
     "expect.js": "^0.3.1",
-    "mocha": "^2.2.5",
-    "istanbul": "~0.3.18"
+    "istanbul": "~0.3.18",
+    "mocha": "^2.2.5"
   }
 }
