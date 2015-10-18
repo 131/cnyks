@@ -4,7 +4,7 @@
   "description": "Command line introspection tool for nodejs (interactive runner)",
   "main": "start.js",
   "scripts": {
-    "test": "node node_modules/istanbul/lib/cli.js cover --dir coverage/master --print none --report none node_modules/mocha/bin/_mocha test/ && node node_modules/istanbul/lib/cli.js  report --include coverage/master/coverage.json --include coverage/child/coverage.json"
+    "test": "node node_modules/istanbul/lib/cli.js cover --dir coverage/master --print none --report none node_modules/mocha/bin/_mocha test/ && node node_modules/istanbul/lib/cli.js  report --include coverage/master/coverage.json --include coverage/child/coverage.json --dir coverage/hml/ text-summary html"
   },
   "repository": {
     "type": "git",
