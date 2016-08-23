@@ -1,5 +1,6 @@
 "use strict";
 
+var sleep = require('nyks/function/sleep');
 var Class = require('uclass');
 
 
@@ -7,14 +8,19 @@ var Class = require('uclass');
 var foo = new Class({
 
 
-
   initialize : function(){
     
   },
 
+
+  //floating alias is without effect
   sum : function(a, b)/**
   * @interactive_runner sync
-  */{
+  * @alias
+  * @alias add
+  * @alias add1 1
+  */ {
+
     return a + b;
   },
 
@@ -26,14 +32,13 @@ var foo = new Class({
 
   },
 
-  bar : function(chain){
-    var b = function(){
-      console.log('This is jambon');
-    }
-    chain(54);
+  bar : function   * (){
+    yield sleep(1000); 
+    return "ok";
   },
 
 
 });
+
 
 module.exports = foo;

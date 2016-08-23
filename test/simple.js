@@ -1,9 +1,9 @@
 var expect   = require("expect.js");
-var cnyks    = require('../lib');
 var path     = require('path');
 var stream   = require('stream');
 var cp       = require('child_process');
 var startsWith = require('mout/string/startsWith');
+var cnyks    = require('../lib');
 
 
 var is_child = process.argv.indexOf("--child") != -1;
@@ -22,20 +22,22 @@ describe("Testing simple class reflection", function(){
   var child;
   before(function(){
 
-    var args = ["node_modules/istanbul/lib/cli.js", "cover", "--dir", "coverage/child", "--report", "none", "--print", "none", "test/simple.js", "--", "--child"];
+    var args = ["node_modules/istanbul/lib/cli.js", "--preserve-comments", "cover", "--dir", "coverage/child", "--report", "none", "--print", "none", "test/simple.js", "--", "--child"];
 
     child = cp.spawn(process.execPath, args);
   });
 
 
-  it("should wait for runner prompt", function(chain) {
+  function waitprompt(chain){
     child.stdout.on("data", function(buf){
       if(startsWith("" + buf, "$fuu.js :")) {
         child.stdout.removeAllListeners("data");
         chain();
       }
     });
-  });
+  }
+
+  it("should wait for runner prompt", waitprompt);
 
   it("should prompt the cal in interactive loop", function(chain) {
 
@@ -43,18 +45,53 @@ describe("Testing simple class reflection", function(){
     child.stdout.once("data", function(buf){
       expect(Number("" + buf)).to.be(3);
 
-
-      child.stdout.on("data", function(buf){
-        if(startsWith("" + buf, "$fuu.js :")) {
-          child.stdout.removeAllListeners("data");
-          chain();
-        }
-      });
-
+      waitprompt(chain)
     });
   });
 
 
+  it("should go back to prompt on dummy line", function(chain) {
+    child.stdin.write("\n");
+    waitprompt(chain)
+  });
+
+  it("should not accept invalid command", function(chain) {
+    child.stdin.write("invalid\n");
+
+    var err = "";
+    child.stderr.once("data", function(buf){ err += buf; });
+
+    waitprompt(function(){
+      child.stderr.removeAllListeners("data");
+      expect(err.trim()).to.be("[Error: Invalid command key 'invalid']");
+      chain();
+    })
+  });
+
+
+  it("should allow proper help rendering", function(chain){
+    child.stdin.write("?\n");
+    var err = "";
+    child.stderr.on("data", function(buf){ err += buf; });
+
+    waitprompt(function(){
+      child.stderr.removeAllListeners("data");
+
+      var args = err.split("\n").map(function(line){
+        return line.replace(/[╠═╣║╔╗╚╝]/g, "").trim();
+      }).filter(function(a){ return !!a});
+      expect(args).to.eql([ '`runner` commands list',
+          'list_commands (?) $chain',
+          'replay (r)',
+          'quit (q)',
+          '`fuu.js` commands list',
+          'sum (add, add1) $a, $b',
+          'bar $chain',
+      ]);
+
+      chain();
+    })
+  });
 
   it("should quit the runner", function(chain) {
 
