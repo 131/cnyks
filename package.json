@@ -2,7 +2,7 @@
   "name": "cnyks",
   "version": "1.0.0",
   "description": "Command line introspection tool for nodejs (interactive runner)",
-  "main": "start.js",
+  "main": "lib/index.js",
   "scripts": {
     "test": "node node_modules/istanbul/lib/cli.js cover --dir coverage/master --print none --report none node_modules/mocha/bin/_mocha test/ && node node_modules/istanbul/lib/cli.js  report --include coverage/master/coverage.json --include coverage/child/coverage.json --dir coverage/hml/ text-summary html"
   },
@@ -26,8 +26,8 @@
   },
   "homepage": "https://github.com/131/cnyks",
   "dependencies": {
-    "mout": "~0.11.0",
-    "nyks": "~1.2.4",
+    "mout": "^1.0.0",
+    "nyks": "^2.30.0",
     "read": "https://github.com/131/read/tarball/master",
     "reflection-js": "^0.2.0",
     "uclass": "~2.0.6",

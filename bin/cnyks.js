@@ -4,6 +4,7 @@
 var Cnyks     = require('../lib');
 var parseargs = require('nyks/process/parseArgs');
 var box       = require('nyks/cli/box');
+var path      = require('path');
 
 var cmdline        = process.argv.slice(2);
 var cmdline_parsed = parseargs(cmdline);
@@ -16,4 +17,26 @@ if(!cmdline.length) {
   }, null, 2) );
 }
 
-Cnyks.start(cmdline_parsed.args[0], cmdline_parsed.dict);
+
+var module_path = cmdline_parsed.args[0];
+var module_name = path.basename(module_path);
+
+
+console.log({module_path});
+
+try {
+  try {
+    module_path = require.resolve(module_path);
+  } catch (e) { 
+    module_path = path.resolve(module_path);
+    require.resolve(module_path);
+  }
+} catch (e){
+  throw Error("Invalid module name");
+}
+
+var module = require(module_path);
+
+cmdline_parsed.dict["ir://name"] = module_name;
+
+Cnyks.start(module, cmdline_parsed.dict);

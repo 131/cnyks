@@ -1,18 +1,12 @@
-var expect   = require("expect.js");
-var path     = require('path');
-var stream   = require('stream');
-var cp       = require('child_process');
-var startsWith = require('mout/string/startsWith');
-var cnyks    = require('../lib');
+"use strict";
 
+var expect       = require("expect.js");
+const path       = require('path');
+const stream     = require('stream');
+const cp         = require('child_process');
+const startsWith = require('mout/string/startsWith');
 
-var is_child = process.argv.indexOf("--child") != -1;
-
-
-if(is_child) {
-  cnyks.start(path.resolve(__dirname, "data/fuu.js"), {"ir://json": true});
-  return;
-}
+const cnyks      = require('../lib');
 
 
 
@@ -22,9 +16,11 @@ describe("Testing simple class reflection", function(){
   var child;
   before(function(){
 
-    var args = ["node_modules/istanbul/lib/cli.js", "--preserve-comments", "cover", "--dir", "coverage/child", "--report", "none", "--print", "none", "test/simple.js", "--", "--child"];
+    var args = ["node_modules/istanbul/lib/cli.js", "--preserve-comments", "cover", "--dir", "coverage/child", "--report", "none", "--print", "none"];
 
+    args.push("bin/cnyks.js", "--", "./test/data/fuu.js", "--ir://json");
     child = cp.spawn(process.execPath, args);
+
   });
 
 
