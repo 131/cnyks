@@ -67,7 +67,7 @@ cnyks foo.js
 
 # Unattended usage flags
 
-* --ir:// is a "namespace" for all cnyks dedicated arguments
+* `--ir://` is a "namespace" for all cnyks dedicated arguments
 * `--ir://run=method_name` run  "method_name" on your module, then quit
 * `--ir://start=method_name` run "method_name" on your module, then start the interactive loop
 * `--ir://json` (to be used with "run")  silence ir helpers, format output as JSON
