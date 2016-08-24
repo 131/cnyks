@@ -1,8 +1,8 @@
-cnyks is a CLI runner (that use reflection) for nodejs modules. 
+[cnyks](https://github.com/131/cnyks) is a CLI runner for nodejs modules. 
 
 # Motivation
-There is **no API** (!) for your module to implement so it can be handled by cnyks (any module can be handled by cnyks !!)
-It goes the other way, cnyks simply reflect your ES6 classe / prototype.
+`cnyks` will look at your class/instance prototype and reflect the API it expose, hence, any module can be handled by cnyks.
+There is **no API** to abide, compose your class the way you like.
 
 # Async support / ES6 generators & async/await
 Asynchronious APIs are supported  (internaly using [co](https://github.com/tj/co) ). Just declare a generator function in your class !
