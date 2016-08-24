@@ -29,8 +29,8 @@
     "mout": "^1.0.0",
     "nyks": "^2.30.0",
     "read": "https://github.com/131/read/tarball/master",
-    "reflection-js": "^0.2.0",
-    "uclass": "~2.0.6",
+    "reflection-js": "^1.1.0",
+    "uclass": "^2.3.0",
     "co": "^4.6.0"
   },
   "devDependencies": {
