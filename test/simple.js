@@ -49,6 +49,16 @@ describe("Testing simple class reflection", function(){
     });
   });
 
+  it("should allow promises", function(chain) {
+
+    child.stdin.write("introduce francois 30\n");
+    child.stdout.once("data", function(buf){
+      expect( "" + buf).to.be(JSON.stringify("Hi francois of 31"));
+
+      waitprompt(chain)
+    });
+  });
+
 
   it("should go back to prompt on dummy line", function(chain) {
     child.stdin.write("\n");
@@ -81,12 +91,13 @@ describe("Testing simple class reflection", function(){
         return line.replace(/[╠═╣║╔╗╚╝]/g, "").trim();
       }).filter(function(a){ return !!a});
       expect(args).to.eql([ '`runner` commands list',
-          'list_commands (?) $chain',
+          'list_commands (?)',
           'replay (r)',
           'quit (q)',
           '`fuu.js` commands list',
           'sum (add, add1) $a, $b',
-          'bar $chain',
+          'bar',
+          'introduce $name, $age',
       ]);
 
       chain();

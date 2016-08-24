@@ -37,6 +37,12 @@ var foo = new Class({
     return "ok";
   },
 
+  introduce : function * (name, age){
+    //this one return a promise
+    return Promise.resolve(`Hi ${name} of ${age + 1}`);
+  },
+
+
 
 });
 
