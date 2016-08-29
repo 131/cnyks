@@ -4,6 +4,8 @@
   "description": "Command line introspection tool for nodejs (interactive runner)",
   "main": "lib/index.js",
   "scripts": {
+    "build:demo": "browserify demo/main.js > demo/_main.js",
+    "demo":"node bin/cnyks.js test/data/fuu.js",
     "test": "node node_modules/istanbul/lib/cli.js cover --dir coverage/master --print none --report none node_modules/mocha/bin/_mocha test/ && node node_modules/istanbul/lib/cli.js  report --include coverage/master/coverage.json --include coverage/child/coverage.json --dir coverage/hml/ text-summary html"
   },
   "repository": {

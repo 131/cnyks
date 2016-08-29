@@ -5,6 +5,8 @@ var Class = require('uclass');
 
 
 
+
+
 var foo = new Class({
 
 
@@ -15,7 +17,6 @@ var foo = new Class({
 
   //floating alias is without effect
   sum : function(a, b)/**
-  * @interactive_runner sync
   * @alias
   * @alias add
   * @alias add1 1

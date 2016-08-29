@@ -22,7 +22,6 @@ var module_path = cmdline_parsed.args[0];
 var module_name = path.basename(module_path);
 
 
-console.log({module_path});
 
 try {
   try {
@@ -38,5 +37,6 @@ try {
 var module = require(module_path);
 
 cmdline_parsed.dict["ir://name"] = module_name;
+
 
 Cnyks.start(module, cmdline_parsed.dict);
