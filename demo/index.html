@@ -1,0 +1,57 @@
+<!doctype html>
+<html>
+    <head>
+        <title>xterm2 demo</title>
+        <link rel="stylesheet" href="xterm.css" />
+
+
+    </head>
+    <body>
+        <h1>cnyks that !</h1>
+        <div id="terminal-container"></div>
+        <div>
+          <h2>Options</h2>
+          <label><input type="checkbox" id="option-cursor-blink"> cursorBlink</label>
+          <label for="cols">Columns <input type="number" id="cols" /></label>
+          <label for="rows">Rows <input type="number" id="rows" /></label>
+        </div>
+
+    </body>
+
+        <style>
+body {
+    font-family: helvetica, sans-serif, arial;
+    font-size: 1em;
+    color: #111;
+}
+label {
+  background-color:#eaeaea;
+  margin:3px;
+  padding:5px;
+}
+h1 {
+    text-align: center;
+}
+
+#terminal-container {
+    width: 800px;
+    height: 450px;
+    margin: 0 auto;
+    padding: 2px;
+}
+
+#terminal-container .terminal {
+    background-color: #111;
+    color: #fafafa;
+    padding: 2px;
+}
+
+#terminal-container .terminal:focus .terminal-cursor {
+    background-color: #fafafa;
+}
+
+        </style>
+
+
+</html>
+        <script src="_main.js">;</script>
