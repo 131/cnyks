@@ -12,7 +12,7 @@ const promisify = require('nyks/function/promisify');
 const term = new Terminal();
   window.term = term; //usefull for debug
 
-createTerminal($('#terminal-container'));
+createTerminal(document.querySelector('#terminal-container'));
 
 function createTerminal(terminalContainer) {
   term.open(terminalContainer);
@@ -21,7 +21,7 @@ function createTerminal(terminalContainer) {
   var runner = cnyks.start(Foo, {
 
     'ir://name'  : 'foo',
-    'ir://prompt' : promisify(term.readline.bind(term)),
+    'ir://prompt' : promisify(term.readline, term),
     'ir://stderr' : term.write.bind(term),
     'ir://stdout' : term.write.bind(term),
   });
