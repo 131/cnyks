@@ -6,7 +6,8 @@
   "scripts": {
     "build:demo": "browserify demo/main.js > demo/_main.js",
     "demo": "node bin/cnyks.js test/data/fuu.js",
-    "test": "node node_modules/istanbul/lib/cli.js cover --dir coverage/master --print none --report none node_modules/mocha/bin/_mocha test/ && node node_modules/istanbul/lib/cli.js  report --include coverage/master/coverage.json --include coverage/child/coverage.json --dir coverage/hml/ text-summary html"
+    "coveralls": "npm install coveralls && node ./node_modules/coveralls/bin/coveralls.js < ./coverage/html/lcov.info",
+    "test": "node node_modules/istanbul/lib/cli.js cover --dir coverage/master --print none --report none node_modules/mocha/bin/_mocha test/ && node node_modules/istanbul/lib/cli.js  report --include coverage/master/coverage.json --include coverage/child/coverage.json --dir coverage/hml/ text-summary html lcov"
   },
   "repository": {
     "type": "git",
@@ -31,13 +32,13 @@
     "async-co": "^1.0.1",
     "co": "^4.6.0",
     "mout": "^1.0.0",
-    "nyks": "^3.0.0",
+    "nyks": "^3.0.1",
     "read": "https://github.com/131/read/tarball/master",
     "reflection-js": "^1.1.0",
     "uclass": "^2.4.0"
   },
   "devDependencies": {
-    "xterm2":"^1.2.0",
+    "xterm2": "^1.2.0",
     "duplexer": "^0.1.1",
     "expect.js": "^0.3.1",
     "istanbul": "~0.3.18",

@@ -69,7 +69,7 @@ describe("Testing simple class reflection", function(){
 
     waitprompt(function(){
       child.stderr.removeAllListeners("data");
-      expect(err.trim()).to.be("[Error: Invalid command key 'invalid']");
+      expect(err.trim()).to.be("Error: Invalid command key 'invalid'");
       chain();
     })
   });
