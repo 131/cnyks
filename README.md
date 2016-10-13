@@ -19,27 +19,6 @@ npm install -g cnyks
 cnyks path/to/your/module.js
 ```
 
-# Basic example
-```
-# write this is foo.js
-function foo(){}
-foo.prototype = {
-  bar : function(){
-    console.log("Hello world");
-  },
-
-  siri_v2 : function(name){
-    return "Hi ! " + name + ", have a nice day ! ";
-  },
-};
-
-module.exports = foo;
-```
-Now, just cnyks' it !
-```
-cnyks foo.js
-```
-
 # ES6 classes & generator example
 ```
 "use strict";
@@ -55,6 +34,10 @@ module.exports  = class {
     yield sleep(1000);
     return Promise.resolve(name);
   }
+  static test(){
+    console.log("Got test");
+  }
+}
 ```
 Now, just cnyks' it !
 ```

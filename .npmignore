@@ -1,5 +1,6 @@
-node_modules
-test
+/node_modules
+/test
+/coverage
+/demo
 npm-debug.log
 .gitignore
-coverage
