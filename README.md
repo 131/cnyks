@@ -1,5 +1,12 @@
 [cnyks](https://github.com/131/cnyks) is a CLI runner for nodejs modules. 
 
+
+[![Build Status](https://travis-ci.org/131/cnyks.svg?branch=master)](https://travis-ci.org/131/cnyks)
+[![Coverage Status](https://coveralls.io/repos/github/131/cnyks/badge.svg?branch=master)](https://coveralls.io/github/131/cnyks?branch=master)
+[![NPM version](https://img.shields.io/npm/v/cnyks.svg)](https://www.npmjs.com/package/cnyks)
+
+
+
 # Motivation
 `cnyks` will look at your class/instance prototype and reflect the API it expose, hence, any module can be handled by cnyks.
 There is **no API** to abide, compose your class the way you like.
@@ -71,5 +78,3 @@ cnyks foo.js
 cli, reflection API, commander, cnyks, interactive runner, async/await, ES6 generators, co, async-co, promise, Promises, yield, "Let's have a beer & talk in Paris"
 
 
-[![Build Status](https://travis-ci.org/131/cnyks.svg?branch=master)](https://travis-ci.org/131/cnyks)
-[![Coverage Status](https://coveralls.io/repos/github/131/cnyks/badge.svg?branch=master)](https://coveralls.io/github/131/cnyks?branch=master)
