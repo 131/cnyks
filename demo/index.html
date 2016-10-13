@@ -9,7 +9,21 @@
     </head>
     <body>
         <h1>cnyks demo</h1>
+<textarea id="klass">
+"use strict";
+
+module.exports = class Test {
+  sum(a, b) {
+    return a + b;
+  }
+  diff(a,b){
+    return a - b;
+  }
+
+}
+  </textarea>
         <div id="terminal-container"></div>
+<button id="runner">Run</button>
     </body>
 
         <style>
@@ -17,6 +31,7 @@ body {
     font-family: helvetica, sans-serif, arial;
     font-size: 1em;
     color: #111;
+  width:100%;
 }
 label {
   background-color:#eaeaea;
@@ -26,12 +41,17 @@ label {
 h1 {
     text-align: center;
 }
-
+textarea {
+  float:left;
+  width:48%;
+  height: 450px;
+}
 #terminal-container {
-    width: 800px;
-    height: 450px;
-    margin: 0 auto;
-    padding: 2px;
+  float:right;
+  width:48%;
+  height: 450px;
+  margin: 0 auto;
+  padding: 2px;
 }
 
 #terminal-container .terminal {
@@ -45,7 +65,6 @@ h1 {
 }
 
         </style>
-
 
 </html>
         <script src="_main.js">;</script>
