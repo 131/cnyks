@@ -34,7 +34,7 @@
     "mout": "^1.0.0",
     "nyks": "^3.0.1",
     "read": "https://github.com/131/read/tarball/master",
-    "reflection-js": "^1.2.0",
+    "reflection-js": "^1.3.0",
     "uclass": "^2.4.0"
   },
   "devDependencies": {
