@@ -12,7 +12,12 @@ module.exports  = class {
     yield sleep(1000);
     return Promise.resolve(name);
   }
-  static testal(){
-    console.log("Got test");
+
+  static testal(name, age) /**
+* Do stuffs
+* @param {string} name - Greet user
+* @param {string} [age] - user age
+*/{
+    console.log("Got test", name);
   }
 }
