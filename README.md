@@ -7,6 +7,8 @@ Aka : cnyks any ES6 class and *boom* you got the greatest command line runner ev
 [![NPM version](https://img.shields.io/npm/v/cnyks.svg)](https://www.npmjs.com/package/cnyks)
 
 
+![demo workflow](/demo/cnyks.gif)
+
 # Motivation
 `cnyks` will look at your class/instance **prototype** and **reflect** the API it exposes, hence, any module can be handled by cnyks.
 There is **no API** to abide, compose your class the way you like.
