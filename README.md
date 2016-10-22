@@ -75,8 +75,8 @@ cnyks foo.js
 # Credits / related
 * [131](https://github.com/131)
 * Derived from [yks/clyks](https://github.com/131/yks/blob/master/class/exts/cli/interactive_runner.php)
-* [co](https://github.com/tj/co), coroutine godness, made cnyks possible
-* [nyks](https://github.com/131/nyks), javascript toolkikt, good complementarity
+* [co](https://github.com/tj/co), coroutine goddess, made cnyks possible
+* [nyks](https://github.com/131/nyks), javascript toolkit, good complementarity
 * [async-co](https://github.com/mout/mout), good complementarity
 
 
