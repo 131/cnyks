@@ -7,7 +7,7 @@ const cp         = require('child_process');
 const startsWith = require('mout/string/startsWith');
 
 const cnyks      = require('../lib');
-
+const defer      = require('nyks/promise/defer');
 
 
 describe("Testing simple class reflection", function(){
@@ -18,86 +18,132 @@ describe("Testing simple class reflection", function(){
 
     var args = ["node_modules/istanbul/lib/cli.js", "--preserve-comments", "cover", "--dir", "coverage/child", "--report", "none", "--print", "none"];
 
-    args.push("bin/cnyks.js", "--", "./test/data/fuu.js", "--ir://json");
+    args.push("bin/cnyks.js", "--", "./test/data/fuu.js", "--ir://json")
     child = cp.spawn(process.execPath, args);
 
   });
 
 
-  function waitprompt(chain){
-    child.stdout.on("data", function(buf){
-      if(startsWith("" + buf, "$fuu.js :")) {
-        child.stdout.removeAllListeners("data");
-        chain();
-      }
-    });
+  function * waitprompt() {
+    var line = yield drain(child.stdout);
+    if(startsWith(line, "$fuu.js :"))
+      return;
+    throw "Invalid prompt" + line;
   }
+
+  function * drain(stream) { //nyks that?
+    var defered = defer();
+    stream.removeAllListeners("data");
+    stream.once("data", function(buf){
+      defered.resolve(("" + buf).trim())
+    });
+    return defered;
+  }
+
 
   it("should wait for runner prompt", waitprompt);
 
-  it("should prompt the cal in interactive loop", function(chain) {
+  it("should test prompt/bool", function* () {
 
-    child.stdin.write("sum 1 2\n");
-    child.stdout.once("data", function(buf){
-      expect(Number("" + buf)).to.be(3);
+    child.stdin.write("comfort\n");
 
-      waitprompt(chain)
-    });
+    var line = yield drain(child.stdout);
+    expect(line).to.eql("you happy ?[Y/n]");
+
+    child.stdin.write("nope\n");
+
+    line = yield drain(child.stderr);
+    expect(line).to.eql("Please type [yes] or [no]");
+
+    line = yield drain(child.stdout);//prompt again
+    expect(line).to.eql("you happy ?[Y/n]");
+
+    child.stdin.write("yes\n");
+    line = yield drain(child.stdout);
+    expect(line).to.eql("good for you!");
+
   });
 
-  it("should allow promises", function(chain) {
+
+  it("should prompt the cal in interactive loop", function* () {
+    child.stdin.write("\n");
+    yield waitprompt();
+    child.stdin.write("sum 1 2\n");
+    var line = yield drain(child.stdout);
+    expect(Number(line)).to.be(3);
+  });
+
+
+  it("should allow promises", function* () {
+    child.stdin.write("\n");
+    yield waitprompt();
 
     child.stdin.write("introduce francois 30\n");
-    child.stdout.once("data", function(buf){
-      expect( "" + buf).to.be(JSON.stringify("Hi francois of 31"));
+    var line = yield drain(child.stdout);
+    expect(line).to.be(JSON.stringify("Hi francois of 31"));
 
-      waitprompt(chain)
-    });
   });
 
-
-  it("should go back to prompt on dummy line", function(chain) {
+  it("should not prompt for optional args", function* () {
     child.stdin.write("\n");
-    waitprompt(chain)
+    yield waitprompt();
+
+    child.stdin.write("introduce\n");
+    var line = yield drain(child.stdout);
+    expect(line).to.be(JSON.stringify("Hi martin of 11"));
+
   });
 
-  it("should not accept invalid command", function(chain) {
+
+  it("should prompt for missing args", function* () {
+    child.stdin.write("\n");
+    yield waitprompt();
+
+    child.stdin.write("sum\n");
+    var line = yield drain(child.stdout);
+    expect(line).to.eql("$fuu.js[a]");
+    child.stdin.write("1\n");
+
+    var line = yield drain(child.stdout);
+    expect(Number(line)).to.be(3);
+
+  });
+
+
+  it("should go back to prompt on dummy line", function* () {
+    child.stdin.write("\n");
+    yield waitprompt();
+  });
+
+  it("should not accept invalid command", function* () {
     child.stdin.write("invalid\n");
 
-    var err = "";
-    child.stderr.once("data", function(buf){ err += buf; });
-
-    waitprompt(function(){
-      child.stderr.removeAllListeners("data");
-      expect(err.trim()).to.be("Error: Invalid command key 'invalid'");
-      chain();
-    })
+    var line = yield drain(child.stderr);
+    expect(line).to.be("Error: Invalid command key 'invalid'");
   });
 
 
-  it("should allow proper help rendering", function(chain){
+  it("should allow proper help rendering", function* (){
     child.stdin.write("?\n");
     var err = "";
+
     child.stderr.on("data", function(buf){ err += buf; });
 
-    waitprompt(function(){
-      child.stderr.removeAllListeners("data");
+    yield waitprompt();
 
-      var args = err.split("\n").map(function(line){
-        return line.replace(/[╠═╣║╔╗╚╝]/g, "").trim();
-      }).filter(function(a){ return !!a});
-      expect(args).to.eql([ '`runner` commands list',
-          'list_commands (?)',
-          'replay (r)',
-          'quit (q)',
-          '`fuu.js` commands list',
-          'sum (add, add1) $a, $b',
-          'bar',
-          'introduce $name, $age',
-      ]);
+    var args = err.split("\n").map(function(line){
+      return line.replace(/[╠═╣║╔╗╚╝]/g, "").trim();
+    }).filter(function(a){ return !!a});
 
-      chain();
-    })
+    expect(args).to.eql([ '`runner` commands list',
+        'list_commands (?)',
+        'replay (r)',
+        'quit (q)',
+        '`fuu.js` commands list',
+        'sum (add, add1) $a, [$b]',
+        'comfort',
+        'introduce [$name, [$age]]',
+    ]);
   });
 
   it("should quit the runner", function(chain) {
@@ -110,7 +156,7 @@ describe("Testing simple class reflection", function(){
     child.stdout.on("data", function(buf){ console.log( ""+buf); });
     child.stderr.on("data", function(buf){ console.log( ""+buf); });
   });
-    
+
 
 
 });

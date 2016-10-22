@@ -1,14 +1,14 @@
-[cnyks](https://github.com/131/cnyks) is a CLI runner for nodejs modules. 
+[cnyks](https://github.com/131/cnyks) is a CLI runner for nodejs modules.
 
+Aka : cnyks any ES6 class and *boom* you got the greatest command line runner ever (no fingerprint **at all**)
 
 [![Build Status](https://travis-ci.org/131/cnyks.svg?branch=master)](https://travis-ci.org/131/cnyks)
 [![Coverage Status](https://coveralls.io/repos/github/131/cnyks/badge.svg?branch=master)](https://coveralls.io/github/131/cnyks?branch=master)
 [![NPM version](https://img.shields.io/npm/v/cnyks.svg)](https://www.npmjs.com/package/cnyks)
 
 
-
 # Motivation
-`cnyks` will look at your class/instance prototype and reflect the API it expose, hence, any module can be handled by cnyks.
+`cnyks` will look at your class/instance **prototype** and **reflect** the API it exposes, hence, any module can be handled by cnyks.
 There is **no API** to abide, compose your class the way you like.
 
 # Async support / ES6 generators & async/await
@@ -51,7 +51,8 @@ Now, just cnyks' it !
 cnyks foo.js
 ```
 
-
+# Bundled utilties
+* `require('cnyks/prompt/bool')(prompt, default)` : prompt (using [read]) for a boolean
 
 
 
@@ -69,9 +70,13 @@ cnyks foo.js
 # TODO
 * Get rich or die tryin'
 
-# Credits
+# Credits / related
 * [131](https://github.com/131)
 * Derived from [yks/clyks](https://github.com/131/yks/blob/master/class/exts/cli/interactive_runner.php)
+* [co](https://github.com/tj/co), coroutine godness, made cnyks possible
+* [nyks](https://github.com/131/nyks), javascript toolkikt, good complementarity
+* [async-co](https://github.com/mout/mout), good complementarity
+
 
 
 # Buzzword / shoutbox / SEO LOVE

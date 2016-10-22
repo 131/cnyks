@@ -7,7 +7,7 @@
     "build:demo": "browserify demo/main.js > demo/_main.js",
     "demo": "node bin/cnyks.js test/data/fuu.js",
     "coveralls": "npm install coveralls && node ./node_modules/coveralls/bin/coveralls.js < ./coverage/html/lcov.info",
-    "test": "node node_modules/istanbul/lib/cli.js cover --dir coverage/master --print none --report none node_modules/mocha/bin/_mocha test/ && node node_modules/istanbul/lib/cli.js  report --include coverage/master/coverage.json --include coverage/child/coverage.json --dir coverage/html/ text-summary html lcov"
+    "test": "node node_modules/istanbul/lib/cli.js cover --dir coverage/master --print none --report none node_modules/mocha/bin/_mocha -- -b -r mocha-plugin-co test/ && node node_modules/istanbul/lib/cli.js  report --include coverage/master/coverage.json --include coverage/child/coverage.json --dir coverage/html/ text-summary html lcov"
   },
   "repository": {
     "type": "git",
@@ -42,6 +42,7 @@
     "expect.js": "^0.3.1",
     "istanbul": "~0.3.18",
     "mocha": "^2.2.5",
+    "mocha-plugin-co": "^1.0.0",
     "xterm2": "^1.2.0"
   }
 }
