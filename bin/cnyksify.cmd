@@ -1,1 +1,1 @@
-@browserify --node --require cnyks/lib/bundle:cnyks --require "%1":app -p [ browserify-wrap --suffix "require('cnyks')(require('app'));" --prefix "var " ] %*
+@node  -e "require('cnyks/bin/cnyksify.js')" %0 %*
