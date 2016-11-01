@@ -2,5 +2,6 @@
 /test
 /coverage
 /demo
+/disc
 npm-debug.log
 .gitignore
