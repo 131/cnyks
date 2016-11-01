@@ -1,6 +1,6 @@
 [cnyks](https://github.com/131/cnyks) is a CLI runner for nodejs modules.
 
-Aka : cnyks any ES6 class and *boom* you got the greatest command line runner ever (no fingerprint **at all**)
+Aka : cnyks any ES6 class and :boom:*boom*:sparkles: you got the greatest command line runner ever (no fingerprint **at all**)
 
 [![Build Status](https://travis-ci.org/131/cnyks.svg?branch=master)](https://travis-ci.org/131/cnyks)
 [![Coverage Status](https://coveralls.io/repos/github/131/cnyks/badge.svg?branch=master)](https://coveralls.io/github/131/cnyks?branch=master)
@@ -13,7 +13,7 @@ Aka : cnyks any ES6 class and *boom* you got the greatest command line runner ev
 # Motivation
 `cnyks` will analyze your class/instance **prototype** and **reflect** the API it exposes, hence, any module can be handled by cnyks. There is **no API** to abide, compose your class the way you like.
 
-# Async support / ES6 generators & async/await
+## Async support / ES6 generators & async/await
 Asynchronious APIs are supported  (internaly using [co](https://github.com/tj/co) ). Just declare a generator function in your class !
 
 
@@ -42,13 +42,22 @@ Now, just cnyks' it !
 cnyks foo.js
 ```
 
-## Installation / CLI usage
+# Installation/Usage
 
+## CLI
 ```
 npm install -g cnyks
 cnyks path/to/your/module.js
 # enjoy !
 ```
+## CLI unattended flags / arguments
+
+* `--ir://` is a "namespace" for all cnyks dedicated arguments
+* `--ir://run=method_name` run  "method_name" on your module, then quit
+* `--ir://start=method_name` run "method_name" on your module, then start the interactive loop
+* `--ir://json` (to be used with "run")  silence ir helpers, format output as JSON
+* `--ir://run=hello --name=bar` run method "hello" with argument `foo` set to 'bar' (i.e. `function hello(name) { }`)
+
 
 
 ## Standalone bootstrap
@@ -76,7 +85,7 @@ browserify  --ignore cnyks --node --standalone app entry.js   > bundle.js
 - `node -e "require('./bundle.js');"` => do nothing
 - `node -e "require('cnyks')(require('./bundle.js'));"` => start runner
 
-# Self running, standalone cnyks bundle (via browserify)
+## Self running, standalone cnyks bundle (via browserify)
 ```
 browserify  --node --require cnyks:cnyks --require ./index.js:app --plugin discify  --plugin [ browserify-wrap --suffix "require('cnyks')(require('app'));" ] > standalone.js
 ```
@@ -85,17 +94,8 @@ browserify  --node --require cnyks:cnyks --require ./index.js:app --plugin disci
 
 
 
-# Bundled utilties
+# Bundled utilities
 * `require('cnyks/prompt/bool')(prompt, default)` : prompt (using [read]) for a boolean
-
-
-# Unattended usage flags / arguments
-
-* `--ir://` is a "namespace" for all cnyks dedicated arguments
-* `--ir://run=method_name` run  "method_name" on your module, then quit
-* `--ir://start=method_name` run "method_name" on your module, then start the interactive loop
-* `--ir://json` (to be used with "run")  silence ir helpers, format output as JSON
-* `--ir://run=hello --name=bar` run method "hello" with argument `foo` set to 'bar' (i.e. `function hello(name) { }`)
 
 
 
