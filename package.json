@@ -2,7 +2,7 @@
   "name": "cnyks",
   "version": "1.8.0",
   "description": "Command line introspection tool for nodejs (interactive runner)",
-  "main": "lib/index.js",
+  "main": "lib/bundle.js",
   "scripts": {
     "build:demo": "browserify demo/main.js > demo/_main.js",
     "demo": "node bin/cnyks.js test/data/fuu.js",
@@ -14,8 +14,7 @@
     "url": "git://github.com/131/cnyks.git"
   },
   "bin": {
-    "cnyks": "./bin/cnyks.js",
-    "cnyksify": "./bin/cnyksify"
+    "cnyks": "./bin/cnyks.js"
   },
   "keywords": [
     "command",
