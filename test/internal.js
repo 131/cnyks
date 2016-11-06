@@ -48,10 +48,10 @@ describe("Internal lookup", function(){
       "ir://prompt" : function(){ return Promise.resolve("quit\n") ;},
     });
 
-    setImmediate(function(){
+    setTimeout(function(){
       expect(collect.stdout).to.eql(8);
       done();
-    });
+    }, 100);
  });
 
 
