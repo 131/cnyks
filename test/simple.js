@@ -68,6 +68,13 @@ describe("Testing simple class reflection", function(){
   it("should prompt the cal in interactive loop", function* () {
     child.stdin.write("\n");
     yield waitprompt();
+
+    child.stdin.write("\n");
+    yield waitprompt();
+
+    child.stdin.write("\n");
+    yield waitprompt();
+
     child.stdin.write("sum 1 2\n");
     var line = yield drain(child.stdout);
     expect(Number(line)).to.be(3);

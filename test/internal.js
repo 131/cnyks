@@ -5,7 +5,10 @@ const path     = require('path');
 const stream   = require('stream');
 const cp       = require('child_process');
 const startsWith = require('mout/string/startsWith');
+const sleep      = require('nyks/function/sleep');
+const defer      = require('nyks/promise/defer');
 
+const Event      = require('events').EventEmitter;
 const cnyks    = require('../lib');
 
 /**
@@ -15,12 +18,39 @@ const cnyks    = require('../lib');
 
 describe("Internal lookup", function(){
 
-  it("Should allow new alias registration", function() {
+  var name = "fuu";
+  function * waitprompt() {
+    var line = yield drain('stdout');
+    if(startsWith(line, `$${name} :`))
+      return;
+    throw "Invalid prompt" + line;
+  }
 
-    var child = cnyks.start(require("./data/fuu.js"));
+  var collect = new Event();
+  function * drain(what) {
+    var defered = defer();
+    collect.removeAllListeners(what);
+    collect.once(what, defered.resolve);
+    return defered;
+  }
+
+  function * prompt(opts) {
+    yield sleep(10); //10 WHAT ?
+    collect.emit("stdout", opts.prompt);  
+    return yield drain("stdin");
+  }
+
+  var child = cnyks.start(require("./data/fuu.js"),  {
+    "ir://json"   : true,
+    "ir://name"   : name,
+    "ir://stderr" : collect.emit.bind(collect, 'stderr'),
+    "ir://stdout" : collect.emit.bind(collect, 'stdout'),
+    "ir://prompt" : prompt,
+  });
+
+  it("Should allow new alias registration", function() {
     expect(child.command_alias("runner", "quit", "qq")).to.be(undefined);
     expect(child.command_alias("runner", "quita", "qq")).to.be(false);
-    process.stdin.unref();
  });
 
   it("Should also scan instances", function() {
@@ -28,33 +58,32 @@ describe("Internal lookup", function(){
     var child = cnyks.start(new fuu());
     expect(child.command_alias("runner", "quit", "qq")).to.be(undefined);
     expect(child.command_alias("runner", "quita", "qq")).to.be(false);
-    process.stdin.unref();
  });
 
 
-  it("Should execute command provided on start", function(done) {
+  it("Should execute command provided on start", function* () {
 
-    var collect = function(what){
-      collect[what] = '';
-      return function(msg){
-        collect[what] += msg;
-      }
-    }
-    var child = cnyks.start(require("./data/fuu.js"), {
-      "ir://json": true, "ir://start" : "sum", "a" : 3, "b" : 5,
 
-      "ir://stderr" : collect("stderr"),
-      "ir://stdout" : collect("stdout"),
-      "ir://prompt" : function(){ return Promise.resolve("quit\n") ;},
+    var child = cnyks.start(require("./data/fuu.js"),  {
+      "ir://json"   : true,
+      "ir://name"   : name,
+      "ir://stderr" : collect.emit.bind(collect, 'stderr'),
+      "ir://stdout" : collect.emit.bind(collect, 'stdout'),
+      "ir://prompt" : prompt,
+
+      "ir://start" : "sum", "a" : 3, "b" : 5,
     });
 
-    setTimeout(function(){
-      expect(collect.stdout).to.eql(8);
-      done();
-    }, 100);
+    var line = yield drain('stdout');
+    expect(line).to.eql(8);
+
+    yield waitprompt();
+
+    collect.emit("stdin", "sum 1 5");
+    var line = yield drain('stdout');
+    expect(line).to.eql(6);
+
  });
-
-
 
 
   it("Should fail on invalid class inspection", function() {
