@@ -59,42 +59,28 @@ cnyks path/to/your/module.js
 * `--ir://run=hello --name=bar` run method "hello" with argument `foo` set to 'bar' (i.e. `function hello(name) { }`)
 
 
+## Self running, standalone cnyks bundle (via browserify)
+Cnyks expose a **cnyksify** plugin for [browserify](https://github.com/substack/node-browserify).
+
+```
+browserify --node entry.js --plugin cnyks/ify  > bundle.js
+```
+- `node bundle.js` => start runner
 
 ## Standalone bootstrap
 Just add this 2 lines footer to your module/class so it can be use by clyks directly
 ```
+  //at the end of your module
 module.exports = SomeClass;
 
 if(module.parent === null) //ensure module is called directly, i.e. not required
   require('cnyks')(SomeClass); //start runner
 ```
-
 Now just `node someapp.js` to start cnyks runner.
-When using the standalone bootstrap code, please consider the following :
-- `node index.js` => start runner
-- `node -e "require('./index.js');"` => do nothing
-
-## browserify & bootstraped code
-When browserifying code with the boostrap line, you should better ignore cnyks module as it is unused & useless (you can also use the require('cn'+'yks') syntax to skip browserify detection)
-
-```
-browserify  --ignore cnyks --node --standalone app entry.js   > bundle.js
-```
-
-- `node bundle.js` => do nothing
-- `node -e "require('./bundle.js');"` => do nothing
-- `node -e "require('cnyks')(require('./bundle.js'));"` => start runner
-
-## Self running, standalone cnyks bundle (via browserify)
-```
-browserify  --node --require cnyks:cnyks --require ./index.js:app --plugin discify  --plugin [ browserify-wrap --suffix "require('cnyks')(require('app'));" ] > standalone.js
-```
-- node standalone.js => start runner
-
-
 
 
 # Bundled utilities
+* `require('cnyks/ify')`  : a browserify plugin
 * `require('cnyks/prompt/bool')(prompt, default)` : prompt (using [read]) for a boolean
 
 

@@ -1,23 +1,14 @@
 "use strict";
 
-var sleep = require('nyks/function/sleep');
-var boolPrompt = require("../../prompt/bool");
-var Class = require('uclass');
+const sleep = require('nyks/function/sleep');
+const boolPrompt = require("../../prompt/bool");
 
 
-
-
-
-var foo = new Class({
-
-
-  initialize : function(){
-    
-  },
+class foo {
 
 
   //floating alias is without effect
-  sum : function(a, b)/**
+  sum(a, b)/**
   * @alias
   * @alias add
   * @alias add1 1
@@ -25,33 +16,33 @@ var foo = new Class({
   */ {
 
     return a + b;
-  },
+  }
 
 
-  dummy : function()
+  dummy()
   /**
   * @interactive_runner hide
   */ {
-  },
+  }
 
 
-  comfort : function   * () {
+  * comfort() {
     var response = yield boolPrompt("you happy ?", true);
     console.log(response ? "good for you!" : "too bad");
-  },
+  }
 
 
-  introduce : function * (name, age)/**
+  * introduce(name, age)/**
  * @param {string} [name=martin] - name to greet with
  * @param {number} [age=10] - age to greet with
  */{
     //this one return a promise
     return Promise.resolve(`Hi ${name} of ${age + 1}`);
-  },
+  }
 
 
 
-});
+}
 
 
 module.exports = foo;

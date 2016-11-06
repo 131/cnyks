@@ -29,13 +29,12 @@
   },
   "homepage": "https://github.com/131/cnyks",
   "dependencies": {
-    "async-co": "^1.0.1",
+    "async-co": "^1.5.0",
     "co": "^4.6.0",
     "mout": "^1.0.0",
-    "nyks": "^3.4.2",
+    "nyks": "^3.6.2",
     "read": "https://github.com/131/read/tarball/master",
-    "reflection-js": "^1.3.0",
-    "uclass": "^2.4.0"
+    "reflection-js": "^1.3.0"
   },
   "devDependencies": {
     "browserify-wrap": "^1.0.1",
