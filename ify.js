@@ -22,7 +22,7 @@ module.exports = function(b){
   var suffix = "require('cnyks')(require('app'));";
 
   var transform = function(buf, enc, next) { this.push(buf); next(); };
-  var flush = function() { this.push(suffix) this.push(null); }
+  var flush = function() { this.push(suffix) ; this.push(null); }
 
   b.pipeline.get("wrap").unshift(new Transform({transform, flush}));
 }
