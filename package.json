@@ -33,7 +33,7 @@
     "async-co": "^1.5.0",
     "co": "^4.6.0",
     "mout": "^1.0.0",
-    "nyks": "^3.6.2",
+    "nyks": "^3.9.1",
     "read": "https://github.com/131/read/tarball/master",
     "reflection-js": "^1.3.0"
   },
