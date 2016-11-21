@@ -26,6 +26,11 @@ class foo {
   }
 
 
+  failure () {
+    throw "NICHT KEINE NEIN NEIN NEIN !";
+  }
+
+
   * comfort() {
     var response = yield boolPrompt("you happy ?", true);
     console.log(response ? "good for you!" : "too bad");

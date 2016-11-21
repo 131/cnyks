@@ -148,6 +148,7 @@ describe("Testing simple class reflection", function(){
         'quit (q)',
         '`fuu.js` commands list',
         'sum (add, add1) $a, [$b]',
+        'failure',
         'comfort',
         'introduce [$name, [$age]]',
     ]);
