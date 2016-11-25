@@ -18,10 +18,17 @@ module.exports = function(b){
   b.require(source, { entry: true, expose: 'app' });
   b.require('cnyks', {expose:'cnyks'});
 
-    //register bundle suffix
+    //register bundle suffix & prefix
   var suffix = "require('cnyks')(require('app'));";
+  var prefix = "#!/usr/bin/env cnyks\n";
 
-  var transform = function(buf, enc, next) { this.push(buf); next(); };
+  var transform = function(buf, enc, next) {
+    if(prefix)
+      prefix = this.push(prefix) && false;
+
+    this.push(buf);
+    next();
+  };
   var flush = function() { this.push(suffix) ; this.push(null); }
 
   b.pipeline.get("wrap").unshift(new Transform({transform, flush}));
