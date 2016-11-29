@@ -26,7 +26,10 @@ class foo {
   }
 
 
-  failure () {
+  failure () /**
+  * this is just sad
+  * yet it's necessary
+  */ {
     throw "NICHT KEINE NEIN NEIN NEIN !";
   }
 

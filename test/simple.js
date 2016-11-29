@@ -139,16 +139,18 @@ describe("Testing simple class reflection", function(){
     yield waitprompt();
 
     var args = err.split("\n").map(function(line){
-      return line.replace(/[╠═╣║╔╗╚╝]/g, "").trim();
+      line = line.replace(/[╠═╣║╔╗╚╝]/g, "").trim();
+      line = line.replace(/\s+/g, " ");
+      return line;
     }).filter(function(a){ return !!a});
 
     expect(args).to.eql([ '`runner` commands list',
-        'list_commands (?)',
+        'list_commands (?) Display all available commands',
         'replay (r)',
         'quit (q)',
         '`fuu.js` commands list',
         'sum (add, add1) $a, [$b]',
-        'failure',
+        'failure this is just sad',
         'comfort',
         'introduce [$name, [$age]]',
     ]);
