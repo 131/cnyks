@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 "use strict";
 
-const bundle     = require('../lib/bundle');
-const box       = require('nyks/cli/box');
 const path      = require('path');
+const box       = require('nyks/cli/box');
+const bundle    = require('../lib/bundle');
 
 const cmdline        = process.argv.slice(2);
 
