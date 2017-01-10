@@ -20,14 +20,17 @@ var module_name = path.basename(module_path);
 
 
 try {
-  try {
-    module_path = require.resolve(module_path);
-  } catch (e) { 
-    module_path = path.resolve(module_path);
-    require.resolve(module_path);
-  }
+ try {
+   module_path = require.resolve(module_path);
+ } catch (e) {
+   try {
+     module_path = require.resolve( path.resolve(module_path) );
+   } catch(e){
+     module_path = require.resolve(path.resolve("node_modules", module_path));
+   }
+ }
 } catch (e){
-  throw Error("Invalid module name");
+  throw Error(`Invalid module name, ${module_name}` );
 }
 
 var module = require(module_path);
