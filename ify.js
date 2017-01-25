@@ -20,7 +20,7 @@ module.exports = function(b){
 
     //register bundle suffix & prefix
   var suffix = "require('cnyks')(require('app'));";
-  var prefix = "#!/usr/bin/env cnyks\n";
+  var prefix = "#!/usr/bin/env node\n";
 
   var transform = function(buf, enc, next) {
     if(prefix)
