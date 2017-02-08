@@ -9,7 +9,7 @@ const Terminal     = require('xterm2');
 const Foo   = require('./foo');
 const cnyks = require('../lib/');
 const promisify = require('nyks/function/promisify');
-const box = require('nyks/cli/box');
+const box = require('../lib/box');
 
 const term = new Terminal();
   window.term = term; //usefull for debug

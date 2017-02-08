@@ -1,5 +1,6 @@
 "use strict";
 
+
 var expect       = require("expect.js");
 const path       = require('path');
 const stream     = require('stream');
@@ -8,6 +9,11 @@ const startsWith = require('mout/string/startsWith');
 
 const cnyks      = require('../lib');
 const defer      = require('nyks/promise/defer');
+
+
+
+
+
 
 
 describe("Testing simple class reflection", function(){

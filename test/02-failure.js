@@ -8,24 +8,24 @@ const startsWith = require('mout/string/startsWith');
 
 const cnyks      = require('../lib');
 const defer      = require('nyks/promise/defer');
+const sleep      = require('nyks/function/sleep');
 
 
 describe("Testing simple class reflection", function(){
   this.timeout(5 * 1000);
 
   var child;
-  before(function(){
-
     var args = ["node_modules/istanbul/lib/cli.js", "--preserve-comments", "cover", "--dir", "coverage/child2", "--report", "none", "--print", "none"];
 
     args.push("bin/cnyks.js", "--", "./test/data/fuu.js", "--ir://json")
-    child = cp.spawn(process.execPath, args);
-
-  });
 
 
   function * waitprompt() {
+    if(!child)
+      child = cp.spawn(process.execPath, args);
+
     var line = yield drain(child.stdout);
+    yield sleep(1000);
     if(startsWith(line, "$fuu.js :"))
       return;
     throw "Invalid prompt" + line;
@@ -42,24 +42,14 @@ describe("Testing simple class reflection", function(){
 
 
   it("should wait for runner prompt", waitprompt);
-
-  it("should test for a failure prompt/bool", function* (chain) {
+  it("should test for a failure prompt/bool", function* () {
 
     child.stdin.write("failure\n");
-    var stdout = "",  stderr = "";
-
-    child.stdout.on("data", function(buf){stdout += buf});
-    child.stderr.on("data", function(buf){stderr += buf});
-
     //var line = yield drain(child.stdout);
-    //var line2 = yield drain(child.stdout);
+    var stderr = yield drain(child.stderr);
 
-
-    child.on('exit', function(exit){
-      expect(stderr).to.match(/NICHT KEINE NEIN NEIN NEIN/);
-      expect(exit).to.eql(1);
-      chain();
-    });
+    expect(stderr).to.match(/NICHT KEINE NEIN NEIN NEIN/);
+    child.kill();
 
   });
 

@@ -2,7 +2,7 @@
 "use strict";
 
 const path      = require('path');
-const box       = require('nyks/cli/box');
+const box       = require('../lib/box');
 const bundle    = require('../lib/bundle');
 
 const cmdline        = process.argv.slice(2);
