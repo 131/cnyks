@@ -32,7 +32,7 @@ describe("Testing simple class reflection", function(){
 
   function * waitprompt() {
     var line = yield drain(child.stdout);
-    if(startsWith(line, "$fuu.js :"))
+    if(startsWith(line, "$foo :"))
       return;
     throw "Invalid prompt" + line;
   }
@@ -114,7 +114,7 @@ describe("Testing simple class reflection", function(){
 
     child.stdin.write("sum\n");
     var line = yield drain(child.stdout);
-    expect(line).to.eql("$fuu.js[a]");
+    expect(line).to.eql("$foo[a]");
     child.stdin.write("1\n");
 
     var line = yield drain(child.stdout);
@@ -154,7 +154,7 @@ describe("Testing simple class reflection", function(){
         'list_commands (?) Display all available commands',
         'replay (r)',
         'quit (q)',
-        '`fuu.js` commands list',
+        '`foo` commands list',
         'sum (add, add1) $a, [$b]',
         'failure this is just sad',
         'comfort',

@@ -36,4 +36,4 @@ try {
 var module = require(module_path);
 
 
-bundle(module, module_name);
+bundle(module, module.name || module_name);

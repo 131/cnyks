@@ -26,7 +26,7 @@ describe("Testing simple class reflection", function(){
 
     var line = yield drain(child.stdout);
     yield sleep(1000);
-    if(startsWith(line, "$fuu.js :"))
+    if(startsWith(line, "$foo :"))
       return;
     throw "Invalid prompt" + line;
   }
