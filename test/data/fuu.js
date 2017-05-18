@@ -4,7 +4,22 @@ const sleep = require('nyks/function/sleep');
 const boolPrompt = require("../../prompt/bool");
 
 
-class foo {
+
+
+
+class dummyBottom {
+  bottom (foo) {
+    return foo;
+  }
+}
+
+class dummy  extends dummyBottom {
+  bar (foo) {
+    return foo;
+  }
+}
+
+class foo extends dummy {
 
 
   //floating alias is without effect

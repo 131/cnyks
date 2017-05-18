@@ -159,6 +159,8 @@ describe("Testing simple class reflection", function(){
         'failure this is just sad',
         'comfort',
         'introduce [$name, [$age]]',
+        'bar $foo',
+        'bottom $foo',
     ]);
   });
 
