@@ -1,6 +1,6 @@
 {
   "name": "cnyks",
-  "version": "1.17.0",
+  "version": "1.17.1",
   "description": "Command line introspection tool for nodejs (interactive runner)",
   "main": "lib/bundle.js",
   "scripts": {
