@@ -8,7 +8,10 @@ const Transform  = require('stream').Transform;
 
 module.exports = function(b){
 
-  var sources = b._options.entries, source = path.resolve(sources[0]);
+  var entries = b._options.entries,
+      sources = typeof entries == "string" ? [entries] : entries,
+      source = path.resolve(sources[0]);
+
   if(sources.length != 1)
     throw "Cnyksify does not support for multiples entries";
 
