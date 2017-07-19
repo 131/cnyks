@@ -11,7 +11,7 @@ const defer      = require('nyks/promise/defer');
 const sleep      = require('nyks/function/sleep');
 
 
-describe("Testing simple class reflection", function(){
+describe("Test crash prompt", function(){
   this.timeout(5 * 1000);
 
   var child;
@@ -20,18 +20,14 @@ describe("Testing simple class reflection", function(){
     args.push("bin/cnyks.js", "--", "./test/data/fuu.js", "--ir://json")
 
 
-  function * waitprompt() {
-    if(!child)
-      child = cp.spawn(process.execPath, args);
-
-    var line = yield drain(child.stdout);
-    yield sleep(1000);
+  async function waitprompt() {
+    var line = await drain(child.stdout);
     if(startsWith(line, "$foo :"))
       return;
     throw "Invalid prompt" + line;
   }
 
-  function * drain(stream) { //nyks that?
+  async function drain(stream) { //nyks that?
     var defered = defer();
     stream.removeAllListeners("data");
     stream.once("data", function(buf){
@@ -40,13 +36,14 @@ describe("Testing simple class reflection", function(){
     return defered;
   }
 
+  child = cp.spawn(process.execPath, args);
 
   it("should wait for runner prompt", waitprompt);
-  it("should test for a failure prompt/bool", function* () {
+  it("should test for a failure prompt/bool", async function() {
 
     child.stdin.write("failure\n");
-    //var line = yield drain(child.stdout);
-    var stderr = yield drain(child.stderr);
+    //var line = await drain(child.stdout);
+    var stderr = await drain(child.stderr);
 
     expect(stderr).to.match(/NICHT KEINE NEIN NEIN NEIN/);
     child.kill();

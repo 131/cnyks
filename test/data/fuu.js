@@ -55,11 +55,12 @@ class foo extends dummy {
   }
 
 
-  * introduce(name, age)/**
+  async introduce(name, age)/**
  * @param {string} [name=martin] - name to greet with
  * @param {number} [age=10] - age to greet with
  */{
     //this one return a promise
+    await sleep(100);
     return Promise.resolve(`Hi ${name} of ${age + 1}`);
   }
 

@@ -13,11 +13,8 @@ Aka : cnyks any ES6 class and :boom:*boom*:sparkles: you got the greatest comman
 # Motivation
 `cnyks` will analyze your class/instance **prototype** and **reflect** the API it exposes, hence, any module can be handled by cnyks. There is **no API** to abide, compose your class the way you like.
 
-## Async support / ES6 generators & async/await
-Asynchronious APIs are supported  (internaly using [co](https://github.com/tj/co) ). Just declare a generator function in your class !
 
-
-# ES6 classes & generator example
+# Example
 ```
 "use strict";
 
@@ -28,9 +25,9 @@ module.exports  = class {
     console.log(name);
   }
 
-  * hello(name) {
-    yield sleep(1000);
-    return Promise.resolve(name);
+  async hello(name) {
+    await sleep(1000);
+    return `Hello ${name}`;
   }
   static test(){
     console.log("Got test");
@@ -77,6 +74,10 @@ if(module.parent === null) //ensure module is called directly, i.e. not required
   require('cnyks')(SomeClass); //start runner
 ```
 Now just `node someapp.js` to start cnyks runner.
+
+
+## Legacy ES5 async support
+Cnyks also allows you to declare async function through generators (internaly using [co](https://github.com/tj/co) ).
 
 
 # Bundled utilities

@@ -8,7 +8,6 @@ const startsWith = require('mout/string/startsWith');
 const sleep      = require('nyks/function/sleep');
 const defer      = require('nyks/promise/defer');
 
-const Event      = require('events').EventEmitter;
 const cnyks    = require('../lib');
 
 /**
@@ -19,32 +18,50 @@ const cnyks    = require('../lib');
 describe("Internal lookup", function(){
 
   var name = "fuu";
-  function * waitprompt() {
-    var line = yield drain('stdout');
+
+  async function waitprompt() {
+    var line = await drain('stdout');
     if(startsWith(line, `$${name} :`))
       return;
     throw "Invalid prompt" + line;
   }
 
-  var collect = new Event();
-  function * drain(what) {
-    var defered = defer();
-    collect.removeAllListeners(what);
-    collect.once(what, defered.resolve);
-    return defered;
+
+  var collect = {};
+
+  var prepare = function(what) {
+    collect[what] = [];
+    collect[what].defer = defer();
+    return function(stuff) {
+      collect[what].push.apply(collect[what], stuff.trim().split("\n"));
+      collect[what].defer.resolve();
+    }
   }
 
-  function * prompt(opts) {
-    yield sleep(10); //10 WHAT ?
-    collect.emit("stdout", opts.prompt);  
-    return yield drain("stdin");
+  async function drain(what) {
+    if(collect[what].length)
+      return collect[what].shift().trim();
+    collect[what].defer = defer();
+    await collect[what].defer;
+    return drain(what);
   }
+
+
+  var stdout = prepare('stdout');
+  var stderr = prepare('stderr');
+  var stdin  = prepare('stdin');
+
+  async function prompt(opts) {
+    stdout(opts.prompt);
+    return await drain("stdin");
+  }
+
 
   var child = cnyks.start(require("./data/fuu.js"),  {
     "ir://json"   : true,
     "ir://name"   : name,
-    "ir://stderr" : collect.emit.bind(collect, 'stderr'),
-    "ir://stdout" : collect.emit.bind(collect, 'stdout'),
+    "ir://stderr" : stderr,
+    "ir://stdout" : stdout,
     "ir://prompt" : prompt,
   });
 
@@ -61,26 +78,28 @@ describe("Internal lookup", function(){
  });
 
 
-  it("Should execute command provided on start", function* () {
+  it("Should execute command provided on start", async function () {
 
 
     var child = cnyks.start(require("./data/fuu.js"),  {
       "ir://json"   : true,
       "ir://name"   : name,
-      "ir://stderr" : collect.emit.bind(collect, 'stderr'),
-      "ir://stdout" : collect.emit.bind(collect, 'stdout'),
+      "ir://stderr" : stderr,
+      "ir://stdout" : stdout,
       "ir://prompt" : prompt,
 
       "ir://start" : "sum", "a" : 3, "b" : 5,
     });
 
-    var line = yield drain('stdout');
+    await waitprompt();
+
+    var line = await drain('stdout');
     expect(line).to.eql(8);
 
-    yield waitprompt();
+    await waitprompt();
 
-    collect.emit("stdin", "sum 1 5");
-    var line = yield drain('stdout');
+    stdin("sum 1 5");
+    var line = await drain('stdout');
     expect(line).to.eql(6);
 
  });
