@@ -94,9 +94,8 @@ Cnyks also allows you to declare async function through generators (internaly us
 * Derived from [yks/clyks](https://github.com/131/yks/blob/master/class/exts/cli/interactive_runner.php)
 * [co](https://github.com/tj/co), coroutine goddess, made cnyks possible
 * [nyks](https://github.com/131/nyks), javascript toolkit, good complementarity
-* [async-co](https://github.com/mout/mout), good complementarity
 
 
 # Buzzword / shoutbox / SEO LOVE
-cli, reflection API, commander, cnyks, interactive runner, async/await, ES6 generators, co, async-co, promise, Promises, yield, "Let's have a beer & talk in Paris"
+cli, reflection API, commander, cnyks, interactive runner, async/await, co, promise, Promises, yield, "Let's have a beer & talk in Paris"
 

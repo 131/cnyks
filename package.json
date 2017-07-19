@@ -31,7 +31,6 @@
   },
   "homepage": "https://github.com/131/cnyks",
   "dependencies": {
-    "async-co": "^1.5.0",
     "co": "^4.6.0",
     "mout": "^1.0.0",
     "nyks": "^3.15.0",
