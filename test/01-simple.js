@@ -48,8 +48,10 @@ describe("Testing simple class reflection", function(){
   });
 
   async function drain(what) {
-    if(what.length)
-      return what.shift().trim();
+    if(what.length) {
+      var out = what.shift().trim();
+      return out;
+    }
     what.defer = defer();
     await what.defer;
     return drain(what);
@@ -58,8 +60,10 @@ describe("Testing simple class reflection", function(){
 
   async function waitprompt() {
     var line = await drain(stdout);
-    if(startsWith(line, "$foo :"))
+    if(startsWith(line, "$foo :")) {
+      await sleep(100); //leave some time for stdin to be ready 
       return;
+    }
     throw "Invalid prompt" + line;
   }
 
@@ -144,7 +148,7 @@ describe("Testing simple class reflection", function(){
   });
 
   it("should not accept invalid command", async function() {
-    child.stdin.write("invalid\n");
+    child.stdin.write("invalid\r\n");
 
     var line = await drain(stderr);
     expect(line).to.be("Error: Invalid command key 'invalid'");
