@@ -5,7 +5,7 @@ const path     = require('path');
 const stream   = require('stream');
 const cp       = require('child_process');
 const startsWith = require('mout/string/startsWith');
-const sleep      = require('nyks/function/sleep');
+const sleep      = require('nyks/async/sleep');
 const defer      = require('nyks/promise/defer');
 
 const cnyks    = require('../lib');

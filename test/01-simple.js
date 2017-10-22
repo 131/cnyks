@@ -9,7 +9,7 @@ const startsWith = require('mout/string/startsWith');
 
 const cnyks      = require('../lib');
 const defer      = require('nyks/promise/defer');
-const sleep      = require('nyks/function/sleep');
+const sleep      = require('nyks/async/sleep');
 
 
 

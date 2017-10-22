@@ -1,6 +1,6 @@
 "use strict";
 
-var sleep = require('nyks/function/sleep');
+var sleep = require('nyks/async/sleep');
 
 module.exports  = class {
   test(name) {

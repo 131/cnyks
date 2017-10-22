@@ -18,7 +18,7 @@ Aka : cnyks any ES6 class and :boom:*boom*:sparkles: you got the greatest comman
 ```
 "use strict";
 
-var sleep = require('nyks/function/sleep');
+var sleep = require('nyks/async/sleep');
 
 module.exports  = class {
   test(name) {

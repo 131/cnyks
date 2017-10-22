@@ -1,6 +1,6 @@
 "use strict";
 
-const sleep = require('nyks/function/sleep');
+const sleep = require('nyks/async/sleep');
 const boolPrompt = require("../../prompt/bool");
 
 
