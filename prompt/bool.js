@@ -1,6 +1,6 @@
 "use strict";
 
-const read     = require('read');
+const read     = require('read-merge-28');
 const promisify = require('nyks/function/promisify');
 const prompt   = promisify(read);
 const toBool = require('nyks/lang/toBool');
