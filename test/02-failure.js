@@ -15,7 +15,7 @@ describe("Test crash prompt", function(){
   this.timeout(5 * 1000);
 
   var child;
-    var args = ["node_modules/istanbul/lib/cli.js", "--preserve-comments", "cover", "--dir", "coverage/child2", "--report", "none", "--print", "none"];
+    var args = ["node_modules/istanbul-alpha-instrument/lib/cli.js", "--preserve-comments", "cover", "--dir", "coverage/child2", "--report", "none", "--print", "none"];
 
     args.push("bin/cnyks.js", "--", "./test/data/fuu.js", "--ir://json")
 

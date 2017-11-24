@@ -10,9 +10,10 @@ const cmdline        = process.argv.slice(2);
 
 if(!cmdline.length) {
   var man = require('../package.json');
-  return process.stderr.write(box("cnyks", JSON.stringify({
+  process.stderr.write(box("cnyks", JSON.stringify({
     version : man.version, path : __dirname
   }, null, 2) ));
+  process.exit();
 }
 
 var module_path = cmdline[0];

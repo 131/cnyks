@@ -18,7 +18,7 @@ const sleep      = require('nyks/async/sleep');
 
 
 describe("Testing simple class reflection", function(){
-  this.timeout(5 * 1000);
+  this.timeout(20 * 1000);
 
   var child;
 
@@ -30,7 +30,7 @@ describe("Testing simple class reflection", function(){
 
   before(function(){
 
-    var args = ["node_modules/istanbul/lib/cli.js", "--preserve-comments", "cover", "--dir", "coverage/child", "--report", "none", "--print", "none"];
+    var args = ["node_modules/istanbul-alpha-instrument/lib/cli.js", "--preserve-comments", "cover", "--dir", "coverage/child", "--report", "none", "--print", "none"];
 
     args.push("bin/cnyks.js", "--", "./test/data/fuu.js", "--ir://json")
     child = cp.spawn(process.execPath, args);
