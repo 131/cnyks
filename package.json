@@ -5,10 +5,14 @@
   "main": "lib/bundle.js",
   "scripts": {
     "build:demo": "browserify demo/main.js > demo/_main.js",
+    "jscs": "jscs --config=node_modules/ivs-jssc/ivs-node.jscsrc lib test prompt bin ify.js",
+    "eslint": "eslint --config=node_modules/ivs-jssc/ivs-node.eslintrc.js lib test prompt bin ify.js",
+    "checkall": "npm run jscs && npm run eslint",
     "coveralls": "npm install coveralls && node ./node_modules/coveralls/bin/coveralls.js < ./coverage/html/lcov.info",
     "demo": "node bin/cnyks.js test/data/fuu.js",
     "discify": "browserify --ignore cnyks --node -p discify lib/bundle.js | discify-reporter --ir://run --source=disc/graph.json",
-    "test": "node node_modules/istanbul-alpha-instrument/lib/cli.js cover --dir coverage/master --print none --report none node_modules/mocha/bin/_mocha -- -b test/ && node node_modules/istanbul/lib/cli.js  report --include \"coverage/**/coverage.raw.json\" --dir coverage/html/ text-summary html lcov",
+    "cover": "node node_modules/istanbul-alpha-instrument/lib/cli.js cover --dir coverage/master --print none --report none node_modules/mocha/bin/_mocha -- -b test/ && node node_modules/istanbul/lib/cli.js  report --include \"coverage/**/coverage.raw.json\" --dir coverage/html/ text-summary html lcov",
+    "test": "npm run checkall && npm run cover",
     "mocha": "node node_modules/mocha/bin/_mocha -b test/"
   },
   "repository": {
@@ -42,6 +46,7 @@
     "expect.js": "^0.3.1",
     "istanbul": "^0.4.5",
     "istanbul-alpha-instrument": "1.1.0-alpha.1",
+    "ivs-jssc": "^2.1.3",
     "mocha": "^3.1.2",
     "xterm2": "^1.2.0"
   }

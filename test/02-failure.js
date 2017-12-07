@@ -1,23 +1,20 @@
 "use strict";
+/* eslint-env node,mocha */
 
 var expect       = require("expect.js");
-const path       = require('path');
-const stream     = require('stream');
 const cp         = require('child_process');
 const startsWith = require('mout/string/startsWith');
 
-const cnyks      = require('../lib');
 const defer      = require('nyks/promise/defer');
-const sleep      = require('nyks/async/sleep');
 
 
-describe("Test crash prompt", function(){
+describe("Test crash prompt", function() {
   this.timeout(5 * 1000);
 
   var child;
-    var args = ["node_modules/istanbul-alpha-instrument/lib/cli.js", "--preserve-comments", "cover", "--dir", "coverage/child2", "--report", "none", "--print", "none"];
+  var args = ["node_modules/istanbul-alpha-instrument/lib/cli.js", "--preserve-comments", "cover", "--dir", "coverage/child2", "--report", "none", "--print", "none"];
 
-    args.push("bin/cnyks.js", "--", "./test/data/fuu.js", "--ir://json")
+  args.push("bin/cnyks.js", "--", "./test/data/fuu.js", "--ir://json");
 
 
   async function waitprompt() {
@@ -30,8 +27,8 @@ describe("Test crash prompt", function(){
   async function drain(stream) { //nyks that?
     var defered = defer();
     stream.removeAllListeners("data");
-    stream.once("data", function(buf){
-      defered.resolve(("" + buf).trim())
+    stream.once("data", function(buf) {
+      defered.resolve(("" + buf).trim());
     });
     return defered;
   }

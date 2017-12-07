@@ -12,7 +12,7 @@ if(!cmdline.length) {
   var man = require('../package.json');
   process.stderr.write(box("cnyks", JSON.stringify({
     version : man.version, path : __dirname
-  }, null, 2) ));
+  }, null, 2)));
   process.exit();
 }
 
@@ -21,17 +21,17 @@ var module_name = path.basename(module_path);
 
 
 try {
- try {
-   module_path = require.resolve(module_path);
- } catch (e) {
-   try {
-     module_path = require.resolve( path.resolve(module_path) );
-   } catch(e){
-     module_path = require.resolve(path.resolve("node_modules", module_path));
-   }
- }
-} catch (e){
-  throw Error(`Invalid module name, ${module_name}` );
+  try {
+    module_path = require.resolve(module_path);
+  } catch (e) {
+    try {
+      module_path = require.resolve(path.resolve(module_path));
+    } catch(e) {
+      module_path = require.resolve(path.resolve("node_modules", module_path));
+    }
+  }
+} catch (e) {
+  throw Error(`Invalid module name, ${module_name}`);
 }
 
 var module = require(module_path);

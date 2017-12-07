@@ -4,9 +4,6 @@ const sleep = require('nyks/async/sleep');
 const boolPrompt = require("../../prompt/bool");
 
 
-
-
-
 class dummyBottom {
   bottom (foo) {
     return foo;
@@ -63,9 +60,6 @@ class foo extends dummy {
     await sleep(100);
     return Promise.resolve(`Hi ${name} of ${age + 1}`);
   }
-
-
-
 }
 
 

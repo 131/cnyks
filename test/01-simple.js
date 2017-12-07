@@ -1,46 +1,42 @@
 "use strict";
+/* eslint-env node,mocha */
 
 
-var expect       = require("expect.js");
-const path       = require('path');
-const stream     = require('stream');
+const expect       = require("expect.js");
 const cp         = require('child_process');
 const startsWith = require('mout/string/startsWith');
 
-const cnyks      = require('../lib');
 const defer      = require('nyks/promise/defer');
 const sleep      = require('nyks/async/sleep');
 
 
 
 
-
-
-
-describe("Testing simple class reflection", function(){
+describe("Testing simple class reflection", function() {
   this.timeout(20 * 1000);
 
   var child;
 
 
-  var stdout = [], stderr = [];
+  var stdout = [];
+  var stderr = [];
   stdout.defer = defer();
   stderr.defer = defer();
 
 
-  before(function(){
+  before(function() {
 
     var args = ["node_modules/istanbul-alpha-instrument/lib/cli.js", "--preserve-comments", "cover", "--dir", "coverage/child", "--report", "none", "--print", "none"];
 
-    args.push("bin/cnyks.js", "--", "./test/data/fuu.js", "--ir://json")
+    args.push("bin/cnyks.js", "--", "./test/data/fuu.js", "--ir://json");
     child = cp.spawn(process.execPath, args);
 
 
-    child.stdout.on("data", function(buf){
+    child.stdout.on("data", function(buf) {
       stdout.push.apply(stdout, String(buf).trim().split("\n"));
       stdout.defer.resolve();
     });
-    child.stderr.on("data", function(buf){
+    child.stderr.on("data", function(buf) {
       stderr.push.apply(stderr, String(buf).trim().split("\n"));
       stderr.defer.resolve();
     });
@@ -61,7 +57,7 @@ describe("Testing simple class reflection", function(){
   async function waitprompt() {
     var line = await drain(stdout);
     if(startsWith(line, "$foo :")) {
-      await sleep(100); //leave some time for stdin to be ready 
+      await sleep(100); //leave some time for stdin to be ready
       return;
     }
     throw "Invalid prompt" + line;
@@ -136,7 +132,7 @@ describe("Testing simple class reflection", function(){
     expect(line).to.eql("$foo[a]");
     child.stdin.write("1\n");
 
-    var line = await drain(stdout);
+    line = await drain(stdout);
     expect(Number(line)).to.be(3);
 
   });
@@ -155,41 +151,42 @@ describe("Testing simple class reflection", function(){
   });
 
 
-  it("should allow proper help rendering", async function(){
+  it("should allow proper help rendering", async function() {
     child.stdin.write("?\n");
 
     await waitprompt();
     var args = await drain(stderr);
     stderr.unshift(args);
 
-    args = stderr.map(function(line){
+    args = stderr.map(function(line) {
       line = line.replace(/[╠═╣║╔╗╚╝]/g, "").trim();
       line = line.replace(/\s+/g, " ");
       return line;
-    }).filter(function(a){ return !!a});
+    }).filter(function(a) {return !!a;});
 
-    expect(args).to.eql([ '`runner` commands list',
-        'list_commands (?) Display all available commands',
-        'quit (q)',
-        '`foo` commands list',
-        'sum (add, add1) $a, [$b]',
-        'failure this is just sad',
-        'comfort',
-        'introduce [$name, [$age]]',
-        'bar $foo',
-        'bottom $foo',
+    expect(args).to.eql([
+      '`runner` commands list',
+      'list_commands (?) Display all available commands',
+      'quit (q)',
+      '`foo` commands list',
+      'sum (add, add1) $a, [$b]',
+      'failure this is just sad',
+      'comfort',
+      'introduce [$name, [$age]]',
+      'bar $foo',
+      'bottom $foo',
     ]);
   });
 
   it("should quit the runner", function(chain) {
 
     child.stdin.end("quit\n");
-    child.on('exit', function(){
+    child.on('exit', function() {
       chain();
     });
 
-    child.stdout.on("data", function(buf){ console.log( ""+buf); });
-    child.stderr.on("data", function(buf){ console.log( ""+buf); });
+    child.stdout.on("data", function(buf) { console.log("" + buf);});
+    child.stderr.on("data", function(buf) { console.log("" + buf);});
   });
 
 
