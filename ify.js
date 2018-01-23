@@ -2,7 +2,7 @@
 
 //cnyksify, a browserify plugin
 //see README.md for details
-
+const sprintf = require('util').format;
 const path = require('path');
 const Transform  = require('stream').Transform;
 
@@ -15,14 +15,18 @@ module.exports = function(b) {
   if(sources.length != 1)
     throw "Cnyksify does not support for multiples entries";
 
+
+  var mod = require(source);
+  var expose = mod.name || 'app';
+
   console.error("Remap %s as app entry", source);
 
-  //re-require source (already in entry, but expose as 'app'
-  b.require(source, { entry : true, expose : 'app' });
+  //re-require source (already in entry, but now exposed)
+  b.require(source, { entry : true, expose});
   b.require('cnyks', {expose : 'cnyks'});
 
   //register bundle suffix & prefix
-  var suffix = "require('cnyks')(require('app'));";
+  var suffix = sprintf("require('cnyks')(require('%s'));", expose);
   var prefix = "#!/usr/bin/env node\n";
 
   var transform = function(buf, enc, next) {
