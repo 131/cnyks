@@ -5,7 +5,9 @@ const path      = require('path');
 const box       = require('../lib/box');
 const bundle    = require('../lib/bundle');
 
-const cmdline        = process.argv.slice(2);
+process.argv.splice(1,1); //exclude cnyks from command line
+
+const cmdline        = process.argv.slice(1); //strip node binary
 
 
 if(!cmdline.length) {
