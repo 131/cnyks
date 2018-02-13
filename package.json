@@ -11,7 +11,7 @@
     "coveralls": "npm install coveralls && node ./node_modules/coveralls/bin/coveralls.js < ./coverage/html/lcov.info",
     "demo": "node bin/cnyks.js test/data/fuu.js",
     "discify": "browserify --ignore cnyks --node -p discify lib/bundle.js | discify-reporter --ir://run --source=disc/graph.json",
-    "cover": "node node_modules/istanbul/lib/cli.js cover --dir coverage/master --print none --report none node_modules/mocha/bin/_mocha -- -b test/ && node node_modules/istanbul/lib/cli.js  report --include \"coverage/**/coverage.raw.json\" --dir coverage/html/ text-summary html lcov",
+    "cover": "node node_modules/istanbul/lib/cli.js cover --dir coverage/master --print none --report none node_modules/mocha/bin/_mocha -- -b test/ && node node_modules/istanbul/lib/cli.js  report --include \"coverage/**/coverage*.json\" --dir coverage/html/ text-summary html lcov",
     "test": "npm run checkall && npm run cover",
     "mocha": "node node_modules/mocha/bin/_mocha -b test/"
   },
