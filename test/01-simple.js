@@ -143,6 +143,12 @@ describe("Testing simple class reflection", function() {
     await waitprompt();
   });
 
+  it("should not accept invalid command", async function() {
+    child.stdin.write("invalid\r\n");
+
+    var line = await drain(stderr);
+    expect(line).to.be("Error: Invalid command key 'invalid'");
+  });
 
 
   it("should allow proper help rendering", async function() {
@@ -171,16 +177,6 @@ describe("Testing simple class reflection", function() {
       'bottom $foo',
     ]);
   });
-
-
-  it("should not accept invalid command", async function() {
-    child.stdin.write("invalid\r\n");
-
-    var line = await drain(stderr);
-    expect(line).to.be("Error: Invalid command key 'invalid'");
-  });
-
-
 
   it("should quit the runner", function(chain) {
 
