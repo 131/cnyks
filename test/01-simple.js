@@ -26,7 +26,7 @@ describe("Testing simple class reflection", function() {
 
   before(function() {
 
-    var args = ["node_modules/istanbul-alpha-instrument/lib/cli.js", "--preserve-comments", "cover", "--dir", "coverage/child", "--report", "none", "--print", "none"];
+    var args = ["node_modules/istanbul/lib/cli.js", "--preserve-comments", "cover", "--dir", "coverage/child", "--report", "none", "--print", "none"];
 
     args.push("bin/cnyks.js", "--", "./test/data/fuu.js", "--ir://json");
     child = cp.spawn(process.execPath, args);
@@ -143,12 +143,6 @@ describe("Testing simple class reflection", function() {
     await waitprompt();
   });
 
-  it("should not accept invalid command", async function() {
-    child.stdin.write("invalid\r\n");
-
-    var line = await drain(stderr);
-    expect(line).to.be("Error: Invalid command key 'invalid'");
-  });
 
 
   it("should allow proper help rendering", async function() {
@@ -177,6 +171,16 @@ describe("Testing simple class reflection", function() {
       'bottom $foo',
     ]);
   });
+
+
+  it("should not accept invalid command", async function() {
+    child.stdin.write("invalid\r\n");
+
+    var line = await drain(stderr);
+    expect(line).to.be("Error: Invalid command key 'invalid'");
+  });
+
+
 
   it("should quit the runner", function(chain) {
 
