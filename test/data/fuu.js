@@ -5,13 +5,13 @@ const boolPrompt = require("../../prompt/bool");
 
 
 class dummyBottom {
-  bottom (foo) {
+  bottom(foo) {
     return foo;
   }
 }
 
 class dummy  extends dummyBottom {
-  bar (foo) {
+  bar(foo) {
     return foo;
   }
 }
@@ -38,7 +38,7 @@ class foo extends dummy {
   }
 
 
-  failure () /**
+  failure() /**
   * this is just sad
   * yet it's necessary
   */ {
