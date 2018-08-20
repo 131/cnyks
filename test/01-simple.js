@@ -8,6 +8,7 @@ const startsWith = require('mout/string/startsWith');
 
 const defer      = require('nyks/promise/defer');
 const sleep      = require('nyks/async/sleep');
+const drain      = require('nyks/stream/drain');
 
 
 
@@ -43,19 +44,19 @@ describe("Testing simple class reflection", function() {
 
   });
 
-  async function drain(what) {
+  async function shift(what) {
     if(what.length) {
       var out = what.shift().trim();
       return out;
     }
     what.defer = defer();
     await what.defer;
-    return drain(what);
+    return shift(what);
   }
 
 
   async function waitprompt() {
-    var line = await drain(stdout);
+    var line = await shift(stdout);
     if(startsWith(line, "$foo :")) {
       await sleep(100); //leave some time for stdin to be ready
       return;
@@ -65,25 +66,27 @@ describe("Testing simple class reflection", function() {
 
 
 
+
+
   it("should wait for runner prompt", waitprompt);
 
   it("should test prompt/bool", async function() {
 
     child.stdin.write("comfort\n");
 
-    var line = await drain(stdout);
+    var line = await shift(stdout);
     expect(line).to.eql("you happy ?[Y/n]");
 
     child.stdin.write("nope\n");
 
-    line = await drain(stderr);
+    line = await shift(stderr);
     expect(line).to.eql("Please type [yes] or [no]");
 
-    line = await drain(stdout);//prompt again
+    line = await shift(stdout);//prompt again
     expect(line).to.eql("you happy ?[Y/n]");
 
     child.stdin.write("yes\n");
-    line = await drain(stdout);
+    line = await shift(stdout);
     expect(line).to.eql("good for you!");
 
   });
@@ -100,7 +103,7 @@ describe("Testing simple class reflection", function() {
     await waitprompt();
 
     child.stdin.write("sum 1 2\n");
-    var line = await drain(stdout);
+    var line = await shift(stdout);
     expect(Number(line)).to.be(3);
   });
 
@@ -109,7 +112,7 @@ describe("Testing simple class reflection", function() {
     await waitprompt();
 
     child.stdin.write("introduce francois 30\n");
-    var line = await drain(stdout);
+    var line = await shift(stdout);
     expect(line).to.be(JSON.stringify("Hi francois of 31"));
 
   });
@@ -118,7 +121,7 @@ describe("Testing simple class reflection", function() {
     await waitprompt();
 
     child.stdin.write("introduce\n");
-    var line = await drain(stdout);
+    var line = await shift(stdout);
     expect(line).to.be(JSON.stringify("Hi martin of 11"));
 
   });
@@ -128,11 +131,11 @@ describe("Testing simple class reflection", function() {
     await waitprompt();
 
     child.stdin.write("sum\n");
-    var line = await drain(stdout);
+    var line = await shift(stdout);
     expect(line).to.eql("$foo[a]");
     child.stdin.write("1\n");
 
-    line = await drain(stdout);
+    line = await shift(stdout);
     expect(Number(line)).to.be(3);
 
   });
@@ -146,7 +149,7 @@ describe("Testing simple class reflection", function() {
   it("should not accept invalid command", async function() {
     child.stdin.write("invalid\r\n");
 
-    var line = await drain(stderr);
+    var line = await shift(stderr);
     expect(line).to.be("Error: Invalid command key 'invalid'");
   });
 
@@ -155,7 +158,7 @@ describe("Testing simple class reflection", function() {
     child.stdin.write("?\n");
 
     await waitprompt();
-    var args = await drain(stderr);
+    var args = await shift(stderr);
     stderr.unshift(args);
 
     args = stderr.map(function(line) {
@@ -172,6 +175,7 @@ describe("Testing simple class reflection", function() {
       'sum (add, add1) $a, [$b]',
       'failure this is just sad',
       'comfort',
+      'binary',
       'introduce [$name, [$age]]',
       'bar $foo',
       'bottom $foo',
@@ -189,6 +193,18 @@ describe("Testing simple class reflection", function() {
     child.stderr.on("data", function(buf) { console.log("" + buf);});
   });
 
+
+  it("should test simple pipe", async function() {
+
+    var args = ["node_modules/istanbul/lib/cli.js", "--preserve-comments", "cover", "--dir", "coverage/child_pipe", "--report", "none", "--print", "none"];
+
+    args.push("bin/cnyks.js", "--", "./test/data/fuu.js", "--ir://raw", "--ir://run=binary");
+    child = cp.spawn(process.execPath, args);
+    var payload = await drain(child.stdout);
+    expect(Buffer.isBuffer(payload)).to.be.ok();
+    expect(payload.toString("utf-8")).to.eql("café");
+
+  });
 
 
 });

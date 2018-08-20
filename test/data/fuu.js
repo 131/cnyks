@@ -51,6 +51,9 @@ class foo extends dummy {
     console.log(response ? "good for you!" : "too bad");
   }
 
+  async binary() {
+    return Buffer("café");
+  }
 
   async introduce(name, age)/**
  * @param {string} [name=martin] - name to greet with
