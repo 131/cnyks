@@ -30,7 +30,7 @@ describe("Testing simple class reflection", function() {
     var args = ["node_modules/nyc/bin/nyc.js", "--temp-directory", "coverage/.nyc_output", "--preserve-comments", "--report-dir", "coverage/child", "--reporter", "none", "--silent"];
 
     args.push("bin/cnyks.js", "./test/data/fuu.js", "--ir://json");
-    child = cp.spawn(process.execPath, args);
+    child = cp.spawn('node', args);
     console.log("Spawning", process.execPath, args);
 
     child.stdout.on("data", function(buf) {
