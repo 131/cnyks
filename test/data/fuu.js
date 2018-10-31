@@ -5,7 +5,7 @@ const boolPrompt = require("../../prompt/bool");
 
 
 class dummyBottom {
-  bottom(foo) {
+  mirror(foo) {
     return foo;
   }
 }
@@ -54,6 +54,7 @@ class foo extends dummy {
   async binary() {
     return Buffer("café");
   }
+
 
   async introduce(name, age)/**
  * @param {string} [name=martin] - name to greet with

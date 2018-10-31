@@ -1,8 +1,6 @@
 "use strict";
-/* eslint-env node,mocha */
 
-
-const expect       = require("expect.js");
+const expect     = require("expect.js");
 const cp         = require('child_process');
 const startsWith = require('mout/string/startsWith');
 
@@ -39,7 +37,6 @@ describe("Testing simple class reflection", function() {
     });
     child.stderr.on("data", function(buf) {
       var line = String(buf).trim().split("\n");
-      console.log("Got stderr", line);
       stderr.push.apply(stderr, line);
       stderr.defer.resolve();
     });
@@ -180,7 +177,7 @@ describe("Testing simple class reflection", function() {
       'binary',
       'introduce [$name, [$age]]',
       'bar $foo',
-      'bottom $foo',
+      'mirror $foo',
     ]);
   });
 

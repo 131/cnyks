@@ -1,5 +1,4 @@
 "use strict";
-/* eslint-env node,mocha */
 
 var expect       = require("expect.js");
 const cp         = require('child_process');
