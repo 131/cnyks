@@ -31,7 +31,7 @@ describe("Testing simple class reflection", function() {
 
     args.push("bin/cnyks.js", "./test/data/fuu.js", "--ir://json");
     child = cp.spawn('node', args);
-    console.log("Spawning", process.execPath, args);
+    //console.log("Spawning", process.execPath, args);
 
     child.stdout.on("data", function(buf) {
       stdout.push.apply(stdout, String(buf).trim().split("\n"));
