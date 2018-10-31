@@ -27,11 +27,11 @@ describe("Testing simple class reflection", function() {
 
   before(function() {
 
-    var args = ["node_modules/istanbul/lib/cli.js", "--preserve-comments", "cover", "--dir", "coverage/child", "--report", "none", "--print", "none"];
+    var args = ["node_modules/nyc/bin/nyc.js", "--temp-directory", "coverage/.nyc_output", "--preserve-comments", "--report-dir", "coverage/child", "--reporter", "none", "--silent"];
 
-    args.push("bin/cnyks.js", "--", "./test/data/fuu.js", "--ir://json");
+    args.push("bin/cnyks.js", "./test/data/fuu.js", "--ir://json");
     child = cp.spawn(process.execPath, args);
-
+    //console.log("Spawning" , process.execPath, args);
 
     child.stdout.on("data", function(buf) {
       stdout.push.apply(stdout, String(buf).trim().split("\n"));
@@ -195,10 +195,10 @@ describe("Testing simple class reflection", function() {
 
 
   it("should test simple pipe", async function() {
+    var args = ["node_modules/nyc/bin/nyc.js", "--temp-directory", "coverage/.nyc_output", "--preserve-comments", "--report-dir", "coverage/child_pipe", "--reporter", "none", "--silent"];
 
-    var args = ["node_modules/istanbul/lib/cli.js", "--preserve-comments", "cover", "--dir", "coverage/child_pipe", "--report", "none", "--print", "none"];
 
-    args.push("bin/cnyks.js", "--", "./test/data/fuu.js", "--ir://raw", "--ir://run=binary");
+    args.push("bin/cnyks.js", "./test/data/fuu.js", "--ir://raw", "--ir://run=binary");
     child = cp.spawn(process.execPath, args);
     var payload = await drain(child.stdout);
     expect(Buffer.isBuffer(payload)).to.be.ok();

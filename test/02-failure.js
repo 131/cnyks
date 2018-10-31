@@ -12,9 +12,9 @@ describe("Test crash prompt", function() {
   this.timeout(5 * 1000);
 
   var child;
-  var args = ["node_modules/istanbul/lib/cli.js", "--preserve-comments", "cover", "--dir", "coverage/child2", "--report", "none", "--print", "none"];
+  var args = ["node_modules/nyc/bin/nyc.js", "--temp-directory", "coverage/.nyc_output", "--preserve-comments", "--report-dir", "coverage/child2", "--reporter", "none", "--silent"];
 
-  args.push("bin/cnyks.js", "--", "./test/data/fuu.js", "--ir://json");
+  args.push("bin/cnyks.js", "./test/data/fuu.js", "--ir://json");
 
 
   async function waitprompt() {

@@ -10,7 +10,8 @@
     "coveralls": "npm install coveralls && node ./node_modules/coveralls/bin/coveralls.js < ./coverage/html/lcov.info",
     "demo": "node bin/cnyks.js test/data/fuu.js",
     "discify": "browserify --ignore cnyks --node -p discify lib/bundle.js | discify-reporter --ir://run --source=disc/graph.json",
-    "cover": "node node_modules/istanbul/lib/cli.js cover --dir coverage/master --print none --report none node_modules/mocha/bin/_mocha -- -b test/ && node node_modules/istanbul/lib/cli.js  report --include \"coverage/**/coverage*.json\" --dir coverage/html/ text-summary html lcov",
+    "cover": "nyc --temp-directory coverage/.nyc_output --report-dir coverage/master --silent --reporter none node_modules/mocha/bin/_mocha -b test/ && nyc --temp-directory coverage/.nyc_output  report --include \"coverage/**/coverage*.json\" --report-dir coverage/html/ --reporter text-summary --reporter html --reporter lcov",
+    "covesr": "nyc  --temp-directory=coverage/.nyc_output --reporter=text-summary --reporter=html --reporter=lcov  mocha",
     "test": "npm run checkall && npm run cover",
     "mocha": "node node_modules/mocha/bin/_mocha -b test/"
   },
@@ -36,15 +37,15 @@
   "dependencies": {
     "co": "^4.6.0",
     "mout": "^1.0.0",
-    "nyks": "^4.1.10",
+    "nyks": "^5.9.0",
     "read-merge-28": "^1.0.7",
     "reflection-js": "^1.4.0"
   },
   "devDependencies": {
     "browserify-wrap": "^1.0.1",
-    "expect.js": "^0.3.1",
-    "istanbul": "^0.4.5",
     "eslint-plugin-ivs": "^1.0.7",
+    "expect.js": "^0.3.1",
+    "nyc": "^13.0.1",
     "mocha": "^3.1.2",
     "xterm2": "^1.2.0"
   }
