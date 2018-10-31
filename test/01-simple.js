@@ -31,14 +31,16 @@ describe("Testing simple class reflection", function() {
 
     args.push("bin/cnyks.js", "./test/data/fuu.js", "--ir://json");
     child = cp.spawn(process.execPath, args);
-    //console.log("Spawning" , process.execPath, args);
+    console.log("Spawning" , process.execPath, args);
 
     child.stdout.on("data", function(buf) {
       stdout.push.apply(stdout, String(buf).trim().split("\n"));
       stdout.defer.resolve();
     });
     child.stderr.on("data", function(buf) {
-      stderr.push.apply(stderr, String(buf).trim().split("\n"));
+      var line = String(buf).trim().split("\n");
+      console.log("Got stderr", line);
+      stderr.push.apply(stderr, line);
       stderr.defer.resolve();
     });
 
