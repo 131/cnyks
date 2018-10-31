@@ -25,7 +25,7 @@ describe("Test mirrors", function() {
     var args = ["node_modules/nyc/bin/nyc.js", "--temp-directory", "coverage/.nyc_output", "--preserve-comments", "--report-dir", "coverage/child_pipe", "--reporter", "none", "--silent"];
 
 
-    var foo = {"this": "is", "a" : ["complex", null, 45, "object"]};
+    var foo = {"this" : "is", "a" : ["complex", null, 45, "object"]};
     args.push("bin/cnyks.js", "./test/data/fuu.js", "--ir://raw", "--ir://run=mirror", "--foo::json=" + JSON.stringify(foo));
     var child = cp.spawn(process.execPath, args);
     var payload = await drain(child.stdout);
