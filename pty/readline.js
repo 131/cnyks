@@ -8,22 +8,22 @@ const readline = async function(opt) {
   let line = "";
 
   let draw = () => {
-    //this.write('\x1b[2K'); // erase all line
-    this.write(`\r${opt.prompt}${line}`);
-    this.write('\x1b[K'); //erase right
+    //this.stderr.write('\x1b[2K'); // erase all line
+    this.stderr.write(`\r${opt.prompt}${line}`);
+    this.stderr.write('\x1b[K'); //erase right
   };
 
   draw();
 
   function read(buf) {
     if(buf == "\x0d") { //enter
-      this.removeListener("data", read);
+      this.stdin.removeListener("data", read);
       defered.resolve(line);
-      this.write("\r\n");
+      this.stderr.write("\r\n");
       return;
     }
     if(buf == "\x03") { //cancel
-      this.removeListener("data", read);
+      this.stdin.removeListener("data", read);
       defered.reject(Error("canceled"));
       return;
     }
@@ -37,7 +37,7 @@ const readline = async function(opt) {
     draw();
   }
 
-  this.on("data", read);
+  this.stdin.on("data", read);
   return defered;
 };
 
