@@ -38,7 +38,7 @@
     "co": "^4.6.0",
     "mout": "^1.0.0",
     "nyks": "^5.11.6",
-    "read-merge-28": "^1.0.7",
+    "read-merge-28": "^1.0.8",
     "reflection-js": "^1.4.3"
   },
   "devDependencies": {
