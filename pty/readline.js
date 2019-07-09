@@ -15,7 +15,7 @@ const readline = async function(opt) {
 
   draw();
 
-  function read(buf) {
+  let read = (buf) => {
     if(buf == "\x0d") { //enter
       this.stdin.removeListener("data", read);
       defered.resolve(line);
@@ -35,7 +35,7 @@ const readline = async function(opt) {
       line = line + buf;
 
     draw();
-  }
+  };
 
   this.stdin.on("data", read);
   return defered;
