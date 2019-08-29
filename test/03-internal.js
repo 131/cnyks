@@ -74,6 +74,14 @@ describe("Internal lookup", function() {
     expect(child.command_alias("runner", "quita", "qq")).to.be(false);
   });
 
+  it("Should expose a completer", function() {
+    var Fuu = require("./data/fuu.js");
+    var child = cnyks.start(new Fuu());
+    expect(child.completer("")).to.eql([["sum", "add", "add1", "failure", "comfort", "binary", "introduce", "bar", "mirror"], '']);
+    expect(child.completer("c")).to.eql([['comfort'], 'c']);
+    expect(child.completer("a")).to.eql([['add', 'add1'], 'a']);
+  });
+
 
   it("Should execute command provided on start", async function () {
 
