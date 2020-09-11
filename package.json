@@ -37,7 +37,7 @@
   "dependencies": {
     "co": "^4.6.0",
     "mout": "^1.0.0",
-    "nyks": "^5.11.6",
+    "nyks": "^6.0.0",
     "read-merge-28": "^1.0.8",
     "reflection-js": "^1.4.3"
   },
