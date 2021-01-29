@@ -2,7 +2,7 @@
 
 Aka : cnyks any ES6 class and :boom:*boom*:sparkles: you got the greatest command line runner ever (no fingerprint **at all**)
 
-[![Build Status](https://travis-ci.org/131/cnyks.svg?branch=master)](https://travis-ci.org/131/cnyks)
+[![Build Status](https://travis-ci.com/131/cnyks.svg?branch=master)](https://travis-ci.com/131/cnyks)
 [![Coverage Status](https://coveralls.io/repos/github/131/cnyks/badge.svg?branch=master)](https://coveralls.io/github/131/cnyks?branch=master)
 [![NPM version](https://img.shields.io/npm/v/cnyks.svg)](https://www.npmjs.com/package/cnyks)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](http://opensource.org/licenses/MIT)
@@ -94,7 +94,6 @@ Cnyks also allows you to declare async function through generators (internaly us
 # Credits / related
 * [131](https://github.com/131)
 * Derived from [yks/clyks](https://github.com/131/yks/blob/master/class/exts/cli/interactive_runner.php)
-* [co](https://github.com/tj/co), coroutine goddess, made cnyks possible
 * [nyks](https://github.com/131/nyks), javascript toolkit, good complementarity
 
 

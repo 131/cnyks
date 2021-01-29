@@ -1,7 +1,0 @@
-image: registry.gitlab.com/131/docker-images/node:8
-tests:
-  stage: test
-  script:
-   - npm install
-   - npm test
-

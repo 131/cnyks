@@ -46,8 +46,8 @@ class foo extends dummy {
   }
 
 
-  * comfort() {
-    var response = yield boolPrompt("you happy ?", true);
+  async comfort() {
+    var response = await boolPrompt("you happy ?", true);
     console.log(response ? "good for you!" : "too bad");
   }
 
