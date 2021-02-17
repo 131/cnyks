@@ -8,10 +8,15 @@ class dummyBottom {
   mirror(foo) {
     return foo;
   }
+
+  bar() {
+
+  }
 }
 
 class dummy  extends dummyBottom {
   bar(foo) {
+    super.bar(foo);
     return foo;
   }
 }
