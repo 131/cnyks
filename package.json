@@ -36,9 +36,9 @@
   "homepage": "https://github.com/131/cnyks",
   "dependencies": {
     "mout": "^1.0.0",
-    "nyks": "^6.1.3",
+    "nyks": "^6.1.5",
     "read-merge-28": "^1.0.8",
-    "reflection-js": "^2.0.4"
+    "reflection-js": "^2.0.5"
   },
   "devDependencies": {
     "browserify-wrap": "^1.0.1",
