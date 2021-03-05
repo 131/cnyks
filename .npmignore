@@ -4,4 +4,5 @@
 /demo
 /disc
 npm-debug.log
-.gitignore
+/.git*
+

@@ -28,7 +28,7 @@
     "introspection",
     "reflection"
   ],
-  "author": "Francois Leurent <131.js@cloudyks.org>",
+  "author": "Francois Leurent <131.code@leurent.email>",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/131/cnyks/issues"
@@ -36,7 +36,7 @@
   "homepage": "https://github.com/131/cnyks",
   "dependencies": {
     "mout": "^1.0.0",
-    "nyks": "^6.1.5",
+    "nyks": "^6.2.0",
     "read-merge-28": "^1.0.8",
     "reflection-js": "^2.0.5"
   },
