@@ -10,8 +10,7 @@ describe("Test mirrors", function() {
   this.timeout(5 * 1000);
 
   it("should test mirror (scalar)", async function() {
-    var args = ["node_modules/nyc/bin/nyc.js", "--temp-directory", "coverage/.nyc_output", "--preserve-comments", "--report-dir", "coverage/child_pipe", "--reporter", "none", "--silent"];
-
+    var args = [];
 
     args.push("bin/cnyks.js", "./test/data/fuu.js", "--ir://raw", "--ir://run=mirror", "--foo=42");
     var child = cp.spawn(process.execPath, args);
@@ -22,8 +21,7 @@ describe("Test mirrors", function() {
   });
 
   it("should test mirror (json)", async function() {
-    var args = ["node_modules/nyc/bin/nyc.js", "--temp-directory", "coverage/.nyc_output", "--preserve-comments", "--report-dir", "coverage/child_pipe", "--reporter", "none", "--silent"];
-
+    var args = [];
 
     var foo = {"this" : "is", "a" : ["complex", null, 45, "object"]};
     args.push("bin/cnyks.js", "./test/data/fuu.js", "--ir://raw", "--ir://run=mirror", "--foo::json=" + JSON.stringify(foo));

@@ -25,10 +25,10 @@ describe("Testing simple class reflection", function() {
 
   before(function() {
 
-    var args = ["node_modules/nyc/bin/nyc.js", "--temp-directory", "coverage/.nyc_output", "--preserve-comments", "--report-dir", "coverage/child", "--reporter", "none", "--silent"];
+    var args = [];
 
     args.push("bin/cnyks.js", "./test/data/fuu.js", "--ir://json");
-    child = cp.spawn('node', args);
+    child = cp.spawn(process.execPath, args);
     //console.log("Spawning", process.execPath, args);
 
     child.stdout.on("data", function(buf) {
@@ -195,8 +195,7 @@ describe("Testing simple class reflection", function() {
 
 
   it("should test simple pipe", async function() {
-    var args = ["node_modules/nyc/bin/nyc.js", "--temp-directory", "coverage/.nyc_output", "--preserve-comments", "--report-dir", "coverage/child_pipe", "--reporter", "none", "--silent"];
-
+    var args = [];
 
     args.push("bin/cnyks.js", "./test/data/fuu.js", "--ir://raw", "--ir://run=binary");
     child = cp.spawn(process.execPath, args);

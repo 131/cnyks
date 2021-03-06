@@ -11,8 +11,7 @@ describe("Test crash prompt", function() {
   this.timeout(5 * 1000);
 
   var child;
-  var args = ["node_modules/nyc/bin/nyc.js", "--temp-directory", "coverage/.nyc_output", "--preserve-comments", "--report-dir", "coverage/child2", "--reporter", "none", "--silent"];
-
+  var args = [];
   args.push("bin/cnyks.js", "./test/data/fuu.js", "--ir://json");
 
 
