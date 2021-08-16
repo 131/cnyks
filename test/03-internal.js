@@ -134,6 +134,17 @@ describe("Internal lookup", function() {
     ]);
   });
 
+  it("Should work with simple class", async function () {
+
+    let foo = cnyks.start(class{run() {} });
+    expect(Object.keys(foo.commands_list)).to.eql([
+      'runner:completer', 'runner:help_cmd', 'runner:list_commands', 'runner:generate_command_hash',
+      'runner:lookup', 'runner:command_alias', 'runner:command_register', 'runner:command_parse',
+      'runner:quit', 'runner:command_loop', 'runner:scan',
+      'Function:run'
+    ]);
+  });
+
 
 
 
