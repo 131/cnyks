@@ -61,6 +61,11 @@ class foo extends dummy {
   }
 
 
+  async whisper() {
+    return [...arguments];
+  }
+
+
   async introduce(name, age)/**
  * @param {string} [name=martin] - name to greet with
  * @param {number} [age=10] - age to greet with

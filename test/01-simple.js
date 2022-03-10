@@ -106,6 +106,14 @@ describe("Testing simple class reflection", function() {
     expect(Number(line)).to.be(3);
   });
 
+  it("should fw extra args", async function() {
+    await waitprompt();
+
+    child.stdin.write("whisper 1 2\n");
+    var line = await shift(stdout);
+    expect(line).to.be("[1,2]");
+  });
+
 
   it("should allow promises", async function() {
     await waitprompt();
@@ -176,6 +184,7 @@ describe("Testing simple class reflection", function() {
       'failure this is just sad',
       'comfort',
       'binary',
+      'whisper',
       'introduce [$name, [$age]]',
       'bar $foo',
       'mirror $foo',
