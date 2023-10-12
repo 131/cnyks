@@ -5,7 +5,7 @@
   "main": "lib/",
   "scripts": {
     "build:demo": "browserify demo/main.js > demo/_main.js",
-    "eslint": "eslint lib test prompt bin pty ify.js",
+    "eslint": "eslint .",
     "checkall": "npm run eslint",
     "demo": "node bin/cnyks.js test/data/fuu.js",
     "discify": "browserify --ignore cnyks --node -p discify lib/bundle.js | discify-reporter --ir://run --source=disc/graph.json",
