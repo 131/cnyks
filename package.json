@@ -36,7 +36,7 @@
     "mout": "^1.2.4",
     "nyks": "^6.9.3",
     "read": "^2.1.0",
-    "reflection-js": "^2.1.0"
+    "reflection-js": "^2.2.0"
   },
   "devDependencies": {
     "browserify-wrap": "^1.0.1",
