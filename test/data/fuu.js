@@ -35,6 +35,9 @@ class foo extends dummy {
     return a + b;
   }
 
+  size(...c) {
+    return c.length;
+  }
 
   dummy()
   /**

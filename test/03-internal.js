@@ -77,10 +77,30 @@ describe("Internal lookup", function() {
   it("Should expose a completer", function() {
     var Fuu = require("./data/fuu.js");
     var child = cnyks.start(new Fuu());
-    expect(child.completer("")).to.eql([["sum", "add", "add1", "failure", "comfort", "binary", "whisper", "introduce", "bar", "mirror"], '']);
+    expect(child.completer("")).to.eql([["sum", "add", "add1", "size", "failure", "comfort", "binary", "whisper", "introduce", "bar", "mirror"], '']);
     expect(child.completer("c")).to.eql([['comfort'], 'c']);
     expect(child.completer("a")).to.eql([['add', 'add1'], 'a']);
   });
+
+  it("Should support rst", async function () {
+
+
+    cnyks.start(require("./data/fuu.js"),  {
+      "ir://json"   : true,
+      "ir://name"   : name,
+      "ir://stderr" : stderr,
+      "ir://stdout" : stdout,
+      "ir://prompt" : prompt,
+
+    });
+
+    await waitprompt();
+    var line = await drain('stdout');
+    stdin('size 1 2 "3 3"');
+    line = await drain('stdout');
+    expect(line).to.eql(3);
+  });
+
 
 
   it("Should execute command provided on start", async function () {

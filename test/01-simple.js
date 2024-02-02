@@ -181,6 +181,7 @@ describe("Testing simple class reflection", function() {
       '`foo` commands list',
       'sum (add) $a, [$b]',
       'add1 (=sum 1)',
+      'size ...$c',
       'failure this is just sad',
       'comfort',
       'binary',
