@@ -20,7 +20,8 @@ module.exports = function(b) {
 
   //re-require source (already in entry, but now exposed)
   b.require(source, { entry : true, expose : 'app'});
-  b.require('cnyks', {expose : 'cnyks'});
+  //  b.require('cnyks', {expose : 'cnyks'});
+  b.require('cnyks/lib/bundle', {expose : 'cnyks/lib/bundle'});
 
   //register bundle suffix & prefix
   var suffix = "require('cnyks/lib/bundle')(require('app'));";
