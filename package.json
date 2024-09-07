@@ -15,7 +15,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/131/cnyks.git"
+    "url": "git@github.com:131/cnyks.git"
   },
   "bin": {
     "cnyks": "./bin/cnyks.js"
