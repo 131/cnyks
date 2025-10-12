@@ -23,18 +23,11 @@ var module_name = path.basename(module_path);
 
 
 try {
-  try {
-    module_path = require.resolve(module_path);
-  } catch(e) {
-    try {
-      module_path = require.resolve(path.resolve(module_path));
-    } catch(e) {
-      module_path = require.resolve(path.resolve("node_modules", module_path));
-    }
-  }
+  module_path = require.resolve(module_path, {paths : ['.']});
 } catch(e) {
   throw Error(`Invalid module name, ${module_name}`);
 }
+
 
 var module = require(module_path);
 

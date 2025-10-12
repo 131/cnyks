@@ -40,7 +40,8 @@
   },
   "devDependencies": {
     "browserify-wrap": "^1.0.1",
-    "eslint-plugin-ivs": "^1.0.7",
+    "eslint": "^8.57.0",
+    "eslint-plugin-ivs": "^4.0.1",
     "expect.js": "^0.3.1",
     "mocha": "^3.1.2",
     "nyc": "^15.1.0",
