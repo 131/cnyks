@@ -22,8 +22,14 @@ var module_path = cmdline[0];
 var module_name = path.basename(module_path);
 
 
+
+
 try {
-  module_path = require.resolve(module_path, {paths : ['.']});
+  try {
+    module_path = require.resolve(module_path, {paths : ['.']});
+  } catch(e) {
+    module_path = require.resolve(path.resolve(module_path));
+  }
 } catch(e) {
   throw Error(`Invalid module name, ${module_name}`);
 }
